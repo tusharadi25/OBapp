@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:ob_explorers/pages/home.dart';
+import 'package:ob_explorers/pages/intro.dart';
+import 'package:ob_explorers/pages/splash.dart';
+
+var routes = <String, WidgetBuilder>{
+  "/home": (BuildContext context) => HomeScreen(),
+  "/intro": (BuildContext context) => IntroScreen(),
+};
 
 void main() => runApp(new MyApp());
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    Color c = const Color.fromRGBO(255, 128, 66, 1.0);
-    return new MaterialApp(
-      title: 'Flutter Demo',
-      theme: new ThemeData(
-        primarySwatch: Colors.deepOrange[400],
-      ),
-      home: new Scaffold(
-        appBar: new AppBar(
-          title: new Text("Offbeat"),
-        ),
-        body: new Text("Hello"),),
-    );
+    return MaterialApp(
+        theme: ThemeData(
+            primaryColor: Colors.red, accentColor: Colors.deepOrange[400]),
+        debugShowCheckedModeBanner: false,
+        home: SplashScreen(),
+        routes: routes);
   }
 }
