@@ -10,10 +10,10 @@ class MyApp extends StatelessWidget {
     return new MaterialApp(
       title: 'Flutter Demo',
       theme: new ThemeData(
-        primarySwatch: Colors.red,
+        primarySwatch: Colors.deepOrange[400],
       ),
       home: new Scaffold(
-        appBar: AppBar(
+        appBar: new AppBar(
           title: new Text("Offbeat"),
         ),
         body: new Text("Hello"),),
