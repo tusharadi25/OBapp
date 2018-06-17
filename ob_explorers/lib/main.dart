@@ -16,8 +16,7 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: new Text("Offbeat"),
         ),
-        body: new Text("Hello"),
-      ),
+        body: new Text("Hello"),),
     );
   }
 }
