@@ -14,7 +14,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Timer(Duration(seconds: 5), () => MyNavigator.goToIntro(context));
+    Timer(Duration(seconds: 5), () => MyNavigator.goToLogin(context));
   }
 
   @override
@@ -41,7 +41,7 @@ class _SplashScreenState extends State<SplashScreen> {
                         child: Icon(
                           Icons.terrain,
                           color: Colors.greenAccent,
-                          size: 60.0,
+                          size: 70.0,
                         ),
                       ),
                       Padding(
@@ -63,7 +63,9 @@ class _SplashScreenState extends State<SplashScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    CircularProgressIndicator(),
+                    CircularProgressIndicator(
+                      backgroundColor: Color(0x000000),
+                    ),
                     Padding(
                       padding: EdgeInsets.only(top: 20.0),
                     ),
