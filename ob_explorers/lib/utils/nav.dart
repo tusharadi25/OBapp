@@ -8,4 +8,9 @@ class MyNavigator {
   static void goToLogin(BuildContext context) {
     Navigator.pushNamed(context, "/login");
   }
+
+  static void goToStart(BuildContext context) {
+    Navigator.pushNamed(context, "/start");
+  }
+
 }
