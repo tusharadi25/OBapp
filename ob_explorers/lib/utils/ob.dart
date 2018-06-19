@@ -4,3 +4,7 @@ class ob{
   static const String next = "NEXT";
   static const String gotIt = "GOT IT";
 }
+
+class user{
+
+}
