@@ -10,9 +10,7 @@ class StartScreen extends StatelessWidget {
       body: Stack(
         fit: StackFit.expand,
         children: <Widget>[
-          Container(
-            decoration: BoxDecoration(color: Colors.deepOrange[400]),
-          ),
+          Container(decoration: BoxDecoration(color: Colors.deepOrange[400]),),
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
