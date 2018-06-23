@@ -9,7 +9,7 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpPageState extends State<SignUpScreen> {
   @override
   List<DropdownMenuItem<String>> elements = [];
-  String sel = null;
+  String sel;
   void load() {
     elements = [];
     elements.add(new DropdownMenuItem(
