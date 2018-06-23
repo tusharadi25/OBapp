@@ -12,6 +12,9 @@
 bin/
 gen/
 out/
+ob_explorers/.flutter-plugins
+ob_explorers/.packages
+ob_explorers/android/local.properties
 
 # Gradle files
 .gradle/
