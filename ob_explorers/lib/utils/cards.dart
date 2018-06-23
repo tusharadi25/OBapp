@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+//import 'package:cloud_firestore/cloud_firestore.dart';
 
 void main() => runApp(new MyApp());
 
@@ -25,7 +25,7 @@ class MyHomePage extends StatelessWidget {
     return new Scaffold(
       appBar: new AppBar(title: new Text(title)),
       body: new StreamBuilder(
-          stream: Firestore.instance.collection('baby').snapshots(),
+ //         stream: Firestore.instance.collection('baby').snapshots(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) return const Text('Loading...');
             return new ListView.builder(
@@ -33,8 +33,8 @@ class MyHomePage extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 10.0),
                 itemExtent: 25.0,
                 itemBuilder: (context, index) {
-                  DocumentSnapshot ds = snapshot.data.documents[index];
-                  return MyCard(data: ds);
+           //       DocumentSnapshot ds = snapshot.data.documents[index];
+            //      return MyCard(data: ds);
                 });
           }),
     );
