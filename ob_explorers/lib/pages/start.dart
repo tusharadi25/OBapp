@@ -10,7 +10,9 @@ class StartScreen extends StatelessWidget {
       body: Stack(
         fit: StackFit.expand,
         children: <Widget>[
-          Container(decoration: BoxDecoration(color: Colors.deepOrange[400]),),
+          Container(
+            decoration: BoxDecoration(color: Colors.deepOrange[400]),
+          ),
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
@@ -106,7 +108,7 @@ class StartScreen extends StatelessWidget {
                         minWidth: 110.0,
                         color: Colors.blueAccent,
                         splashColor: Colors.red,
-                        onPressed: () => {},
+                        onPressed: () => MyNavigator.goToSignUp(context),
                       ),
                     ],
                   ),
