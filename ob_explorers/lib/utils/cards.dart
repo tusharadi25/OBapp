@@ -1,21 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-
-void main() => runApp(new MyApp());
-
-class MyApp extends StatelessWidget {
-  const MyApp();
-
-  @override
-  Widget build(BuildContext context) {
-    return new MaterialApp(
-      title: 'Baby Names',
-      home: const MyHomePage(title: 'Baby Name Votes'),
-    );
-  }
-}
-
 class MyHomePage extends StatelessWidget {
   const MyHomePage({Key key, this.title}) : super(key: key);
 
@@ -26,7 +11,7 @@ class MyHomePage extends StatelessWidget {
     return new Scaffold(
       appBar: new AppBar(title: new Text(title)),
       body: new StreamBuilder(
-          stream: Firestore.instance.collection('baby').snapshots(),
+          stream: Firestore.instance.collection('Trips').snapshots(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) return const Text('Loading...');
             return new ListView.builder(
@@ -51,27 +36,7 @@ class MyCard extends StatelessWidget {
       child: new Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          const ListTile(
-            leading: const Icon(Icons.album),
-            title: const Text('The Enchanted Nightingale'),
-            subtitle:
-                const Text('Music by Julie Gable. Lyrics by Sidney Stein.'),
-          ),
-          new ButtonTheme.bar(
-            // make buttons use the appropriate styles for cards
-            child: new ButtonBar(
-              children: <Widget>[
-                new FlatButton(
-                  child: const Text('BUY TICKETS'),
-                  onPressed: () {/* ... */},
-                ),
-                new FlatButton(
-                  child: const Text('LISTEN'),
-                  onPressed: () {/* ... */},
-                ),
-              ],
-            ),
-          ),
+          Text(data),
         ],
       ),
     );
