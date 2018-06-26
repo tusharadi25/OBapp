@@ -62,47 +62,57 @@ class StartScreen extends StatelessWidget {
                   width: 200.0,
                   child: Column(
                     children: <Widget>[
-                      MaterialButton(
-                          elevation: 5.0,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Icon(
-                                Icons.person,
-                                size: 40.0,
-                              ),
-                              Text("  LOGIN",
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 20.0)),
-                            ],
-                          ),
-                          minWidth: 300.0,
-                          color: Colors.blueAccent,
-                          padding: EdgeInsets.all(8.0),
-                          splashColor: Colors.deepPurple,
-                          onPressed: () => MyNavigator.goToLogin(context)),
                       Padding(
-                        padding: EdgeInsets.only(top: 10.0),
-                      ),
-                      MaterialButton(
-                        elevation: 5.0,
-                        padding: EdgeInsets.all(8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Icon(
-                              Icons.person_add,
-                              size: 40.0,
-                            ),
-                            Text('  SIGNUP',
-                                style: TextStyle(
-                                    color: Colors.black, fontSize: 20.0)),
-                          ],
-                        ),
-                        minWidth: 110.0,
-                        color: Colors.blueAccent,
-                        splashColor: Colors.red,
-                        onPressed: () => MyNavigator.goToSignUp(context),
+                          padding: EdgeInsets.all(10.0),
+                          child: Material(
+                              borderRadius: BorderRadius.circular(30.0),
+                              elevation: 5.0,
+                              child: MaterialButton(
+                                  elevation: 5.0,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Icon(
+                                        Icons.person,
+                                        size: 40.0,
+                                      ),
+                                      Text("  LOGIN",
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 20.0)),
+                                    ],
+                                  ),
+                                  minWidth: 300.0,
+                                  color: Colors.blue,
+                                  padding: EdgeInsets.all(8.0),
+                                  splashColor: Colors.blueAccent,
+                                  onPressed: () =>
+                                      MyNavigator.goToLogin(context)))),
+                      Padding(
+                        padding: EdgeInsets.all(10.0),
+                        child: Material(
+                            borderRadius: BorderRadius.circular(30.0),
+                            elevation: 5.0,
+                            child: MaterialButton(
+                              elevation: 5.0,
+                              padding: EdgeInsets.all(8.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Icon(
+                                    Icons.person_add,
+                                    size: 40.0,
+                                  ),
+                                  Text('  SIGNUP',
+                                      style: TextStyle(
+                                          color: Colors.black, fontSize: 20.0)),
+                                ],
+                              ),
+                              minWidth: 110.0,
+                              color: Colors.green,
+                              splashColor: Colors.greenAccent,
+                              onPressed: () => MyNavigator.goToSignUp(context),
+                            )),
                       ),
                     ],
                   ),

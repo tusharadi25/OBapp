@@ -23,22 +23,18 @@ class _LoginPageState extends State<LoginScreen> {
     final email = TextFormField(
       keyboardType: TextInputType.emailAddress,
       autofocus: false,
-      initialValue: 'alucard@gmail.com',
       decoration: InputDecoration(
         hintText: 'Email',
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
       ),
     );
 
     final password = TextFormField(
       autofocus: false,
-      initialValue: 'some password',
       obscureText: true,
       decoration: InputDecoration(
         hintText: 'Password',
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
       ),
     );
 
@@ -54,7 +50,8 @@ class _LoginPageState extends State<LoginScreen> {
           onPressed: () {
             MyNavigator.goToHome(context);
           },
-          color: Colors.lightGreenAccent,
+          color: Colors.green,
+          splashColor: Colors.greenAccent,
           child: Text('Log In', style: TextStyle(color: Colors.white)),
         ),
       ),
@@ -70,22 +67,22 @@ class _LoginPageState extends State<LoginScreen> {
 
     return Scaffold(
       backgroundColor: Colors.limeAccent[50],
-      body: Center(
+      body: Container(
+          child: Center(
         child: ListView(
-          shrinkWrap: true,
-          padding: EdgeInsets.only(left: 24.0, right: 24.0),
+          padding: EdgeInsets.only(left: 24.0, right: 24.0, top: 50.0),
           children: <Widget>[
             logo,
-            SizedBox(height: 48.0),
+            SizedBox(height: 90.0),
             email,
-            SizedBox(height: 8.0),
-            password,
             SizedBox(height: 24.0),
+            password,
+            SizedBox(height: 32.0),
             loginButton,
             forgotLabel
           ],
         ),
-      ),
+      )),
     );
   }
 }
