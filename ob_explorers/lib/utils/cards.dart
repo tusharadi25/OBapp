@@ -17,7 +17,7 @@ class MyHomePage extends StatelessWidget {
             return new ListView.builder(
                 itemCount: snapshot.data.documents.length,
                 padding: const EdgeInsets.only(top: 10.0),
-                itemExtent: 25.0,
+                itemExtent: 200.0,
                 itemBuilder: (context, index) {
                   DocumentSnapshot ds = snapshot.data.documents[index];
                   return MyCard(data: ds);
@@ -32,11 +32,37 @@ class MyCard extends StatelessWidget {
   const MyCard({Key key, this.data}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return new Card(
-      child: new Column(
-        mainAxisSize: MainAxisSize.min,
+    return Card(
+      child: Wrap(
         children: <Widget>[
-          Text(data),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.max,
+            children: <Widget>[
+              ListTile(
+                leading: const Icon(Icons.album),
+                title: Text('Trek'),
+                subtitle:
+                     Text(data.data["About"].toString().substring(0,200),
+                     textAlign: TextAlign.justify,),
+              ),
+              ButtonTheme.bar(
+                // make buttons use the appropriate styles for cards
+                child: new ButtonBar(
+                  children: <Widget>[
+                    new FlatButton(
+                      child: const Text('Info'),
+                      onPressed: () {/* ... */},
+                    ),
+                    new FlatButton(
+                      child: const Text('Register'),
+                      onPressed: () {/* ... */},
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ],
       ),
     );
