@@ -28,138 +28,144 @@ class _SignUpPageState extends State<SignUpScreen> {
   Widget build(BuildContext context) {
     load();
 
-    final heading = Text(
-      "Personal Info",
-      style: TextStyle(
-        fontWeight: FontWeight.bold,
-        fontSize: 22.0,
-      ),
-    );
-
-    final fullName = Padding(
-        padding: EdgeInsets.symmetric(vertical: 10.0),
-        child: TextFormField(
-          keyboardType: TextInputType.text,
-          decoration: InputDecoration(
-            hintText: "Full Name",
-          ),
-        ));
-
-    final bloodGroup = Padding(
-        padding: EdgeInsets.symmetric(vertical: 10.0),
-        child: DropdownButton(
-          value: sel,
-          items: elements,
-          hint: new Text("Select Blood Group"),
-          onChanged: (value) {
-            sel = value;
-            setState(() {});
-          },
-        ));
-
-    final address = Padding(
-        padding: EdgeInsets.symmetric(vertical: 10.0),
-        child: TextFormField(
-          keyboardType: TextInputType.text,
-          decoration: InputDecoration(
-            hintText: "Address",
-          ),
-        ));
-
-    final personalInfo = Container(
-      child: ListView(
-        shrinkWrap: true,
-        children: <Widget>[heading, fullName, bloodGroup, address],
-      ),
-    );
-    final heading2 = Text(
-      "Contact Info",
-      style: TextStyle(
-        fontWeight: FontWeight.bold,
-        fontSize: 22.0,
-      ),
-    );
-
-    final email = Padding(
-        padding: EdgeInsets.symmetric(vertical: 10.0),
-        child: TextFormField(
-          keyboardType: TextInputType.emailAddress,
-          decoration: InputDecoration(
-            hintText: "Email Address",
-          ),
-        ));
-
-    final phone = Padding(
-        padding: EdgeInsets.symmetric(vertical: 10.0),
-        child: TextFormField(
-          keyboardType: TextInputType.number,
-          maxLength: 10,
-          decoration: InputDecoration(
-            hintText: "Phone No.",
-          ),
-        ));
-
-    final contactInfo = Container(
-        child: ListView(
-      shrinkWrap: true,
-      children: <Widget>[heading2, email, phone],
-    ));
-
-    final heading3 = Text(
-      "Emergency Info",
-      style: TextStyle(
-        fontWeight: FontWeight.bold,
-        fontSize: 22.0,
-      ),
-    );
-
-    final emergencyName = Padding(
-        padding: EdgeInsets.symmetric(vertical: 10.0),
-        child: TextFormField(
-          keyboardType: TextInputType.text,
-          decoration: InputDecoration(
-            hintText: "Emergency Contact Person Name",
-          ),
-        ));
-
-    final phone2 = Padding(
-        padding: EdgeInsets.symmetric(vertical: 10.0),
-        child: TextFormField(
-          keyboardType: TextInputType.number,
-          maxLength: 10,
-          decoration: InputDecoration(
-            hintText: "Phone No.",
-          ),
-        ));
-
-    final relation = Padding(
-        padding: EdgeInsets.symmetric(vertical: 10.0),
-        child: TextFormField(
-          keyboardType: TextInputType.text,
-          decoration: InputDecoration(
-            hintText: "Your Relation",
-          ),
-        ));
-
-    final emergencyInfo = Container(
-        child: ListView(
-      shrinkWrap: true,
-      children: <Widget>[heading3, emergencyName, phone2, relation],
-    ));
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Container(
-          child: Center(
-        child: ListView(
-          shrinkWrap: true,
-          padding: EdgeInsets.only(left: 24.0, right: 24.0),
-          children: <Widget>[
-            personalInfo,
-            contactInfo,
-            emergencyInfo,
-          ],
-        ),
-      )),
+      body: Padding(
+        padding: EdgeInsets.only(top: 25.0, right: 25.0),
+        child: Container(
+            child: Center(
+          child: Form(
+            autovalidate: true,
+            child: ListView(
+              padding: EdgeInsets.only(left: 24.0, right: 24.0),
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 4.0),
+                  child: Text(
+                    "Personal Info",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 22.0,
+                    ),
+                  ),
+                ),
+                Padding(
+                    padding: EdgeInsets.symmetric(vertical: 10.0),
+                    child: TextFormField(
+                      keyboardType: TextInputType.text,
+                      decoration: InputDecoration(
+                        hintText: "Full Name",
+                      ),
+                    )),
+                Padding(
+                    padding: EdgeInsets.symmetric(vertical: 10.0),
+                    child: DropdownButton(
+                      value: sel,
+                      items: elements,
+                      hint: new Text("Select Blood Group"),
+                      onChanged: (value) {
+                        sel = value;
+                        setState(() {});
+                      },
+                    )),
+                Padding(
+                    padding: EdgeInsets.symmetric(vertical: 10.0),
+                    child: TextFormField(
+                      keyboardType: TextInputType.text,
+                      decoration: InputDecoration(
+                        hintText: "Address",
+                      ),
+                    )),
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 4.0),
+                  child: Text(
+                    "Contact Info",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 22.0,
+                    ),
+                  ),
+                ),
+                Padding(
+                    padding: EdgeInsets.symmetric(vertical: 10.0),
+                    child: TextFormField(
+                      keyboardType: TextInputType.emailAddress,
+                      decoration: InputDecoration(
+                        hintText: "Email Address",
+                      ),
+                    )),
+                Padding(
+                    padding: EdgeInsets.symmetric(vertical: 10.0),
+                    child: TextFormField(
+                      keyboardType: TextInputType.number,
+                      maxLength: 10,
+                      decoration: InputDecoration(
+                        hintText: "Phone No.",
+                      ),
+                    )),
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 4.0),
+                  child: Text(
+                    "Emergency Info",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 22.0,
+                    ),
+                  ),
+                ),
+                Padding(
+                    padding: EdgeInsets.symmetric(vertical: 10.0),
+                    child: TextFormField(
+                      keyboardType: TextInputType.text,
+                      decoration: InputDecoration(
+                        hintText: "Emergency Contact Person Name",
+                      ),
+                    )),
+                Padding(
+                    padding: EdgeInsets.symmetric(vertical: 10.0),
+                    child: TextFormField(
+                      keyboardType: TextInputType.number,
+                      maxLength: 10,
+                      decoration: InputDecoration(
+                        hintText: "Phone No.",
+                      ),
+                    )),
+                Padding(
+                    padding: EdgeInsets.symmetric(vertical: 10.0),
+                    child: TextFormField(
+                      keyboardType: TextInputType.text,
+                      decoration: InputDecoration(
+                        hintText: "Your Relation",
+                      ),
+                    )),
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 6.0),
+                  child: MaterialButton(
+                    elevation: 5.0,
+                    padding: EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Icon(
+                          Icons.arrow_forward,
+                          size: 40.0,
+                        ),
+                        Text('  SUBMIT',
+                            style:
+                                TextStyle(color: Colors.black, fontSize: 20.0)),
+                      ],
+                    ),
+                    minWidth: 110.0,
+                    color: Colors.blueAccent,
+                    splashColor: Colors.red,
+                    onPressed: () => {},
+                  ),
+                )
+              ],
+            ),
+          ),
+        )),
+      ),
     );
   }
 }
