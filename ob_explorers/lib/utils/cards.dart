@@ -17,7 +17,7 @@ class MyHomePage extends StatelessWidget {
             return new ListView.builder(
                 itemCount: snapshot.data.documents.length,
                 padding: const EdgeInsets.only(top: 10.0),
-                itemExtent: 200.0,
+                itemExtent: 350.0,
                 itemBuilder: (context, index) {
                   DocumentSnapshot ds = snapshot.data.documents[index];
                   return MyCard(data: ds);
@@ -33,37 +33,48 @@ class MyCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Wrap(
-        children: <Widget>[
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.max,
-            children: <Widget>[
-              ListTile(
-                leading: const Icon(Icons.album),
-                title: Text('Trek'),
-                subtitle:
-                     Text(data.data["About"].toString().substring(0,200),
-                     textAlign: TextAlign.justify,),
+      child: Padding(
+        padding: EdgeInsets.all(10.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.max,
+          children: <Widget>[
+            Container(
+              alignment: FractionalOffset.topCenter,
+              child:
+              Image.network(
+                data.data["Image"],
+
+                fit: BoxFit.cover,
               ),
-              ButtonTheme.bar(
-                // make buttons use the appropriate styles for cards
-                child: new ButtonBar(
-                  children: <Widget>[
-                    new FlatButton(
-                      child: const Text('Info'),
-                      onPressed: () {/* ... */},
+            ),
+            ListTile(
+              title: Text(data.data["Name"].toString()),
+              //subtitle:
+            ),
+            ButtonTheme.bar(
+              // make buttons use the appropriate styles for cards
+              child: ButtonBar(
+                children: <Widget>[
+                  FlatButton(
+                    child: const Text('Info'),
+                    onPressed: () {/* ... */},
+                  ),
+                  MaterialButton(
+                    color: Colors.blue,
+                    child: const Text(
+                      'Register',
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
                     ),
-                    new FlatButton(
-                      child: const Text('Register'),
-                      onPressed: () {/* ... */},
-                    ),
-                  ],
-                ),
+                    onPressed: () {/* ... */},
+                  ),
+                ],
               ),
-            ],
-          ),
-        ],
+            ),
+          ],
+        ),
       ),
     );
   }
