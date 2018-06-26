@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 class MyHomePage extends StatelessWidget {
   const MyHomePage({Key key, this.title}) : super(key: key);
 
@@ -33,6 +32,7 @@ class MyCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      elevation: 5.0,
       child: Padding(
         padding: EdgeInsets.all(10.0),
         child: Column(
@@ -41,11 +41,8 @@ class MyCard extends StatelessWidget {
           children: <Widget>[
             Container(
               alignment: FractionalOffset.topCenter,
-              child:
-              Image.network(
-                data.data["Image"],
-
-                fit: BoxFit.cover,
+              child: Image.network(data.data["Image"],
+                fit: BoxFit.fill,
               ),
             ),
             ListTile(
