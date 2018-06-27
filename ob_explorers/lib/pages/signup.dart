@@ -27,7 +27,7 @@ class _SignUpPageState extends State<SignUpScreen> {
 
   Widget build(BuildContext context) {
     load();
-
+    final _fkey = GlobalKey<FormState>();
     return Scaffold(
       appBar: AppBar(
         title: Text("Sign Up"),
@@ -37,6 +37,7 @@ class _SignUpPageState extends State<SignUpScreen> {
       body: Container(
           child: Center(
         child: Form(
+          key: _fkey,
           autovalidate: true,
           child: ListView(
             padding: EdgeInsets.only(left: 24.0, right: 24.0),
@@ -155,24 +156,24 @@ class _SignUpPageState extends State<SignUpScreen> {
                     shadowColor: Colors.green,
                     elevation: 5.0,
                     child: MaterialButton(
-                      padding: EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Icon(
-                            Icons.arrow_forward,
-                            size: 40.0,
-                          ),
-                          Text('  SUBMIT',
-                              style: TextStyle(
-                                  color: Colors.black, fontSize: 20.0)),
-                        ],
-                      ),
-                      minWidth: 110.0,
-                      color: Colors.green,
-                      splashColor: Colors.greenAccent,
-                      onPressed: () => {},
-                    )),
+                        padding: EdgeInsets.all(8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Icon(
+                              Icons.arrow_forward,
+                              size: 40.0,
+                            ),
+                            Text('  SUBMIT',
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 20.0)),
+                          ],
+                        ),
+                        minWidth: 110.0,
+                        color: Colors.green,
+                        splashColor: Colors.greenAccent,
+                        onPressed: (){
+                        })),
               )
             ],
           ),
