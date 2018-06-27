@@ -4,6 +4,7 @@ import 'package:ob_explorers/pages/login.dart';
 import 'package:ob_explorers/pages/splash.dart';
 import 'package:ob_explorers/pages/start.dart';
 import 'package:ob_explorers/pages/signup.dart';
+import 'package:ob_explorers/pages/Info.dart';
 
 var routes = <String, WidgetBuilder>{
   "/home": (BuildContext context) => HomeScreen(),
