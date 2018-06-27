@@ -4,7 +4,6 @@ import 'package:ob_explorers/pages/login.dart';
 import 'package:ob_explorers/pages/splash.dart';
 import 'package:ob_explorers/pages/start.dart';
 import 'package:ob_explorers/pages/signup.dart';
-import 'package:ob_explorers/pages/Info.dart';
 
 var routes = <String, WidgetBuilder>{
   "/home": (BuildContext context) => HomeScreen(),
@@ -20,7 +19,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         theme: ThemeData(
-            primaryColor: Colors.deepOrangeAccent, accentColor: Colors.white),
+            primaryColor: Colors.deepOrangeAccent,
+            accentColor: Colors.white,
+            fontFamily: 'Roboto-Regular'),
         debugShowCheckedModeBanner: false,
         home: SplashScreen(),
         routes: routes);

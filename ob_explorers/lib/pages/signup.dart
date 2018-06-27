@@ -31,6 +31,7 @@ class _SignUpPageState extends State<SignUpScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Sign Up"),
+        elevation: 4.0,
       ),
       backgroundColor: Colors.white,
       body: Container(
