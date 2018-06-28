@@ -13,6 +13,50 @@ class MyHomePage extends StatelessWidget {
         title: new Text(title),
         elevation: 4.0,
       ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              child: Text('Drawer Header'),
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+            ),
+            ListTile(
+              title: Text('Item 1'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text('Item 2'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text('Item 3'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            Column(
+              children: <Widget>[
+                Divider(),
+                ListTile(
+                  title: Text('SignOut'),
+                  trailing: Icon(Icons.exit_to_app),
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                  },
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
       body: new StreamBuilder(
           stream: Firestore.instance.collection('Trips').snapshots(),
           builder: (context, snapshot) {
@@ -23,16 +67,16 @@ class MyHomePage extends StatelessWidget {
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                    Image.asset(
-                      "assets/mc.png",
-                      width: 200.0,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.all(10.0),
-                      child: Text("Loading...."),
-                    ),
-                    CircularProgressIndicator(),
-                  ]),
+                        Image.asset(
+                          "assets/mc.png",
+                          width: 200.0,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.all(10.0),
+                          child: Text("Loading...."),
+                        ),
+                        CircularProgressIndicator(),
+                      ]),
                 ),
               );
             return new ListView.builder(
@@ -95,21 +139,20 @@ class MyCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.max,
           children: <Widget>[
             FlatButton(
-              child:
-            Container(
-              height: 150.0,
-              child: Stack(
-                fit: StackFit.expand,
-                children: <Widget>[
-                  Image.network(
-                    data.data["Image"],
-                    fit: BoxFit.cover,
-                  )
-                ],
+              child: Container(
+                height: 150.0,
+                child: Stack(
+                  fit: StackFit.expand,
+                  children: <Widget>[
+                    Image.network(
+                      data.data["Image"],
+                      fit: BoxFit.cover,
+                    )
+                  ],
+                ),
               ),
-            ),
               padding: EdgeInsets.all(0.0),
-              onPressed: ()=> MyNavigator.showInfo(context, data),
+              onPressed: () => MyNavigator.showInfo(context, data),
             ),
             ListTile(
                 title: Text(
