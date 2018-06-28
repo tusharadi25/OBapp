@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:ob_explorers/utils/ob.dart';
 import 'package:ob_explorers/utils/nav.dart';
@@ -19,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    List<Color> lis = <Color>[Colors.deepOrange, Colors.deepOrangeAccent];
+    List<Color> lis = <Color>[Colors.red,Colors.deepOrange, Colors.deepOrangeAccent];
     return Scaffold(
       body: Stack(
         fit: StackFit.expand,

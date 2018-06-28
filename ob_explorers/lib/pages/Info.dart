@@ -44,13 +44,17 @@ class InfoScreen extends StatelessWidget {
                 children: <Widget>[
                   FlatButton(
                     child: Text('Contact',
-                      style: TextStyle(color: Colors.black),),
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    onPressed: ()=>{},
                   ),
                   MaterialButton(
                     elevation: 2.0,
                     child: Text("Register",
                     style: TextStyle(color: Colors.white),),
                     color: Colors.blueAccent,
+
+                      onPressed: ()=>{},
                   ),
                 ],
               ),
