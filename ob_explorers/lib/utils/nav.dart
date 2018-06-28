@@ -24,4 +24,12 @@ class MyNavigator {
       return InfoScreen(data: data,);
     }));
   }
+  static void goToAbout(BuildContext context) {
+    Navigator.pushNamed(context, "/about");
+  }
+
+  static void goToDev(BuildContext context) {
+    Navigator.pushNamed(context, "/dev");
+  }
 }
+

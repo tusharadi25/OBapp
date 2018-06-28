@@ -30,15 +30,19 @@ class MyHomePage extends StatelessWidget {
               },
             ),
             ListTile(
-              title: Text('Item 2'),
+              title: Text('About'),
+              trailing: Icon(Icons.info),
               onTap: () {
                 Navigator.pop(context);
+                MyNavigator.goToAbout(context);
               },
             ),
             ListTile(
-              title: Text('Item 3'),
+              title: Text('Developers'),
+              trailing: Icon(Icons.developer_mode),
               onTap: () {
                 Navigator.pop(context);
+                MyNavigator.goToDev(context);
               },
             ),
             Column(
@@ -80,6 +84,7 @@ class MyHomePage extends StatelessWidget {
                 ),
               );
             return new ListView.builder(
+                physics: const AlwaysScrollableScrollPhysics(),
                 itemCount: snapshot.data.documents.length,
                 padding: const EdgeInsets.only(top: 10.0, bottom: 20.0),
                 itemBuilder: (context, index) {

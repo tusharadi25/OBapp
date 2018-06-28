@@ -54,7 +54,7 @@ class _LoginPageState extends State<LoginScreen> {
           height: 45.0,
           onPressed: () {
             var u = null;
-            if (u != null) {
+            if (u == null) {
               MyNavigator.goToHome(context);
             }
           },
@@ -70,7 +70,8 @@ class _LoginPageState extends State<LoginScreen> {
         'Forgot password?',
         style: TextStyle(color: Colors.black54),
       ),
-      onPressed: () {},
+      onPressed: () {
+      },
     );
 
     return Scaffold(

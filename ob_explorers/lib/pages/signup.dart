@@ -170,7 +170,7 @@ class _SignUpPageState extends State<SignUpScreen> {
                     onSaved: (value) => _eph = value,
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
-                      hintText: "Phone No.",
+                       hintText: "Phone No.",
                     ),
                   )),
               Padding(
