@@ -29,7 +29,7 @@ class MyHomePage extends StatelessWidget {
                     ),
                     Padding(
                       padding: EdgeInsets.all(10.0),
-                      child: Text("Loading.."),
+                      child: Text("Loading...."),
                     ),
                     CircularProgressIndicator(),
                   ]),
@@ -37,7 +37,7 @@ class MyHomePage extends StatelessWidget {
               );
             return new ListView.builder(
                 itemCount: snapshot.data.documents.length,
-                padding: const EdgeInsets.only(top: 10.0),
+                padding: const EdgeInsets.only(top: 10.0, bottom: 20.0),
                 itemBuilder: (context, index) {
                   DocumentSnapshot ds = snapshot.data.documents[index];
                   return MyCard(data: ds);
@@ -87,13 +87,15 @@ class MyCard extends StatelessWidget {
     var info = data.data["Information"];
     return Card(
       color: Colors.white,
-      elevation: 5.0,
+      elevation: 4.0,
       child: Padding(
         padding: EdgeInsets.all(10.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.max,
           children: <Widget>[
+            FlatButton(
+              child:
             Container(
               height: 150.0,
               child: Stack(
@@ -105,6 +107,9 @@ class MyCard extends StatelessWidget {
                   )
                 ],
               ),
+            ),
+              padding: EdgeInsets.all(0.0),
+              onPressed: ()=> MyNavigator.showInfo(context, data),
             ),
             ListTile(
                 title: Text(

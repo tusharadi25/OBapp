@@ -14,11 +14,11 @@ class InfoScreen extends StatelessWidget {
       ),
       body: Container(
         padding: EdgeInsets.all(10.0),
-        child: Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              Image.network(data.data["Image"]),
+              Image.network(data.data["Image"],
+              fit: BoxFit.fitWidth,),
               Text(
                 data.data["Name"],
                 style: TextStyle(
@@ -39,7 +39,6 @@ class InfoScreen extends StatelessWidget {
               Divider(),
             ],
           ),
-        ),
       ),
     );
   }
