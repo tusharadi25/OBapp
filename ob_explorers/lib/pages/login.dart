@@ -5,8 +5,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:async';
 import 'package:google_sign_in/google_sign_in.dart';
 
-
-
 class LoginScreen extends StatefulWidget {
   static String tag = 'login-page';
   @override
@@ -55,11 +53,11 @@ class _LoginPageState extends State<LoginScreen> {
           minWidth: 200.0,
           height: 45.0,
           onPressed: () {
-            var u=null;
-            if(u!=null) {
+            var u = null;
+            if (u != null) {
               MyNavigator.goToHome(context);
             }
-            },
+          },
           color: Colors.green,
           splashColor: Colors.greenAccent,
           child: Text('Log In', style: TextStyle(color: Colors.white)),
@@ -97,7 +95,8 @@ class _LoginPageState extends State<LoginScreen> {
               onPressed: () {
                 Future<FirebaseUser> _handleSignIn() async {
                   GoogleSignInAccount googleUser = await _googleSignIn.signIn();
-                  GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+                  GoogleSignInAuthentication googleAuth =
+                      await googleUser.authentication;
                   FirebaseUser user = await _auth.signInWithGoogle(
                     accessToken: googleAuth.accessToken,
                     idToken: googleAuth.idToken,
@@ -106,12 +105,14 @@ class _LoginPageState extends State<LoginScreen> {
                   MyNavigator.goToHome(context);
                   return user;
                 }
+
                 var u = _handleSignIn();
                 print(u.toString());
               },
               color: Colors.lightBlueAccent,
               splashColor: Colors.greenAccent,
-              child: Text('Sign In with Google', style: TextStyle(color: Colors.white)),
+              child: Text('Sign In with Google',
+                  style: TextStyle(color: Colors.white)),
             ),
           ],
         ),
