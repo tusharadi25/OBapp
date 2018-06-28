@@ -53,12 +53,7 @@ class _LoginPageState extends State<LoginScreen> {
         child: MaterialButton(
           minWidth: 200.0,
           height: 45.0,
-          onPressed: () {
-            var u = null;
-            if (u != null) {
-              MyNavigator.goToHome(context);
-            }
-          },
+          onPressed: () {},
           color: Colors.green,
           splashColor: Colors.greenAccent,
           child: Text('Log In', style: TextStyle(color: Colors.white)),
@@ -107,7 +102,6 @@ class _LoginPageState extends State<LoginScreen> {
                 }
                 var u=_handleSignIn().then((FirebaseUser user) =>MyNavigator.goToHome(context)
                 ).catchError((e) => print(e));
-
               },
               color: Colors.lightBlueAccent,
               splashColor: Colors.greenAccent,
