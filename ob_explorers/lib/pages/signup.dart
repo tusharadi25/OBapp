@@ -10,6 +10,7 @@ class _SignUpPageState extends State<SignUpScreen> {
   @override
   List<DropdownMenuItem<String>> elements = [];
   String sel;
+  String _fn, _add, _em, _psw, _ph, _ecpn, _eph, _yr;
   void load() {
     elements = [];
     elements.add(new DropdownMenuItem(
@@ -25,9 +26,20 @@ class _SignUpPageState extends State<SignUpScreen> {
     elements.add(new DropdownMenuItem(child: Text('O-'), value: 'O-'));
   }
 
+  final _fkey = GlobalKey<FormState>();
+  void validateAndSave() {
+    final form = _fkey.currentState;
+    if (form.validate()) {
+      form.save();
+      print("valid" +
+          "$_fn, $_add, $_em, $_psw, $_ph, $_ecpn, $_eph, $_yr, $sel");
+    } else
+      print("Invalid");
+  }
+
   Widget build(BuildContext context) {
     load();
-    final _fkey = GlobalKey<FormState>();
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Sign Up"),
@@ -38,7 +50,6 @@ class _SignUpPageState extends State<SignUpScreen> {
           child: Center(
         child: Form(
           key: _fkey,
-          autovalidate: true,
           child: ListView(
             padding: EdgeInsets.only(left: 24.0, right: 24.0),
             children: <Widget>[
@@ -55,6 +66,9 @@ class _SignUpPageState extends State<SignUpScreen> {
               Padding(
                   padding: EdgeInsets.symmetric(vertical: 10.0),
                   child: TextFormField(
+                    validator: (value) =>
+                        value.isEmpty ? 'Name Cannot be Empty' : null,
+                    onSaved: (value) => _fn = value,
                     keyboardType: TextInputType.text,
                     decoration: InputDecoration(
                       hintText: "Full Name",
@@ -74,6 +88,9 @@ class _SignUpPageState extends State<SignUpScreen> {
               Padding(
                   padding: EdgeInsets.symmetric(vertical: 10.0),
                   child: TextFormField(
+                    validator: (value) =>
+                        value.isEmpty ? 'Address cannot be empty' : null,
+                    onSaved: (value) => _add = value,
                     keyboardType: TextInputType.text,
                     decoration: InputDecoration(
                       hintText: "Address",
@@ -92,6 +109,9 @@ class _SignUpPageState extends State<SignUpScreen> {
               Padding(
                   padding: EdgeInsets.symmetric(vertical: 10.0),
                   child: TextFormField(
+                    validator: (value) =>
+                        value.isEmpty ? 'Email-id Cannot be Empty' : null,
+                    onSaved: (value) => _em = value,
                     keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
                       hintText: "Email Address",
@@ -100,6 +120,9 @@ class _SignUpPageState extends State<SignUpScreen> {
               Padding(
                   padding: EdgeInsets.symmetric(vertical: 10.0),
                   child: TextFormField(
+                    validator: (value) =>
+                        value.isEmpty ? 'Password Cannot be Empty' : null,
+                    onSaved: (value) => _psw = value,
                     obscureText: true,
                     keyboardType: TextInputType.text,
                     decoration: InputDecoration(
@@ -109,6 +132,9 @@ class _SignUpPageState extends State<SignUpScreen> {
               Padding(
                   padding: EdgeInsets.symmetric(vertical: 10.0),
                   child: TextFormField(
+                    validator: (value) =>
+                        value.isEmpty ? 'Phone no. Cannot be Empty' : null,
+                    onSaved: (value) => _ph = value,
                     keyboardType: TextInputType.number,
                     maxLength: 10,
                     decoration: InputDecoration(
@@ -128,6 +154,9 @@ class _SignUpPageState extends State<SignUpScreen> {
               Padding(
                   padding: EdgeInsets.symmetric(vertical: 10.0),
                   child: TextFormField(
+                    validator: (value) =>
+                        value.isEmpty ? 'Field Cannot be Empty' : null,
+                    onSaved: (value) => _ecpn = value,
                     keyboardType: TextInputType.text,
                     decoration: InputDecoration(
                       hintText: "Emergency Contact Person Name",
@@ -136,6 +165,9 @@ class _SignUpPageState extends State<SignUpScreen> {
               Padding(
                   padding: EdgeInsets.symmetric(vertical: 10.0),
                   child: TextFormField(
+                    validator: (value) =>
+                        value.isEmpty ? 'Field Cannot be Empty' : null,
+                    onSaved: (value) => _eph = value,
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                       hintText: "Phone No.",
@@ -144,6 +176,9 @@ class _SignUpPageState extends State<SignUpScreen> {
               Padding(
                   padding: EdgeInsets.symmetric(vertical: 10.0),
                   child: TextFormField(
+                    validator: (value) =>
+                        value.isEmpty ? 'Field Cannot be Empty' : null,
+                    onSaved: (value) => _yr = value,
                     keyboardType: TextInputType.text,
                     decoration: InputDecoration(
                       hintText: "Your Relation",
@@ -156,24 +191,24 @@ class _SignUpPageState extends State<SignUpScreen> {
                     shadowColor: Colors.green,
                     elevation: 5.0,
                     child: MaterialButton(
-                        padding: EdgeInsets.all(8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Icon(
-                              Icons.arrow_forward,
-                              size: 40.0,
-                            ),
-                            Text('  SUBMIT',
-                                style: TextStyle(
-                                    color: Colors.black, fontSize: 20.0)),
-                          ],
-                        ),
-                        minWidth: 110.0,
-                        color: Colors.green,
-                        splashColor: Colors.greenAccent,
-                        onPressed: (){
-                        })),
+                      padding: EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Icon(
+                            Icons.arrow_forward,
+                            size: 40.0,
+                          ),
+                          Text('  SUBMIT',
+                              style: TextStyle(
+                                  color: Colors.black, fontSize: 20.0)),
+                        ],
+                      ),
+                      minWidth: 110.0,
+                      color: Colors.green,
+                      splashColor: Colors.greenAccent,
+                      onPressed: validateAndSave,
+                    )),
               )
             ],
           ),
