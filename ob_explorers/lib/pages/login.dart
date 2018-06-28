@@ -54,7 +54,7 @@ class _LoginPageState extends State<LoginScreen> {
           height: 45.0,
           onPressed: () {
             var u = null;
-            if (u != null) {
+            if (u == null) {
               MyNavigator.goToHome(context);
             }
           },
