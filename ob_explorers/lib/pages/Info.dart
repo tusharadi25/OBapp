@@ -37,6 +37,23 @@ class InfoScreen extends StatelessWidget {
                 ),
               ),
               Divider(),
+              
+              
+              //last
+              ButtonBar(
+                children: <Widget>[
+                  FlatButton(
+                    child: Text('Contact',
+                      style: TextStyle(color: Colors.black),),
+                  ),
+                  MaterialButton(
+                    elevation: 2.0,
+                    child: Text("Register",
+                    style: TextStyle(color: Colors.white),),
+                    color: Colors.blueAccent,
+                  ),
+                ],
+              ),
             ],
           ),
       ),
