@@ -103,12 +103,11 @@ class _LoginPageState extends State<LoginScreen> {
                     idToken: googleAuth.idToken,
                   );
                   print("signed in " + user.displayName);
-                  MyNavigator.goToHome(context);
                   return user;
                 }
+                var u=_handleSignIn().then((FirebaseUser user) =>MyNavigator.goToHome(context)
+                ).catchError((e) => print(e));
 
-                var u = _handleSignIn();
-                print(u.toString());
               },
               color: Colors.lightBlueAccent,
               splashColor: Colors.greenAccent,
