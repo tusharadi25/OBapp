@@ -343,6 +343,44 @@ class InfoScreen extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 3.0),
                 ),
+                Row(
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Column(
+                        children: <Widget>[Icon(Icons.check)],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Column(
+                        children: <Widget>[
+                          Text(
+                            "Cost",
+                            style: TextStyle(fontSize: 16.0),
+                          )
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Column(
+                        children: <Widget>[Icon(Icons.arrow_forward)],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Column(
+                        children: <Widget>[
+                          Text("₹ "+
+                            data.data["Cost"].toString(),
+                            style: TextStyle(fontSize: 16.0),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                )
               ],
             ),
           ),
