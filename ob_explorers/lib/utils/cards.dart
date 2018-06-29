@@ -6,30 +6,34 @@ import 'package:ob_explorers/utils/ob.dart';
 class MyHomePage extends StatelessWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
   final String title;
-  var tempU=U.user;
+  var tempU = U.user;
 
-  String disaplayName(){
+  String displayName() {
     var dn;
-    try{
-      dn = tempU.disaplayName;
-      return tempU.disaplayName;
-    } catch (e){
+    try {
+      dn = tempU.displayName;
+      if (dn != null) {
+        return tempU.displayName;
+      }
+      return tempU.email;
+    } catch (e) {
       return tempU.email;
     }
   }
-  String photoUrl(){
+
+  String photoUrl() {
     var pu;
-    try{
-      pu=tempU.photoUrl;
-      if(pu!=null) {
+    try {
+      pu = tempU.photoUrl;
+      if (pu != null) {
         return tempU.photoUrl;
       }
       return "https://firebasestorage.googleapis.com/v0/b/offbeat-explorers-adi25.appspot.com/o/default-user.png?alt=media&token=4be80f32-a3cf-4e5c-a49e-5244f8106c09";
-
-    } catch (e){
+    } catch (e) {
       return "https://firebasestorage.googleapis.com/v0/b/offbeat-explorers-adi25.appspot.com/o/default-user.png?alt=media&token=4be80f32-a3cf-4e5c-a49e-5244f8106c09";
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -41,20 +45,22 @@ class MyHomePage extends StatelessWidget {
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-           UserAccountsDrawerHeader(
-             accountName: Text(disaplayName()),
-             accountEmail: Text(tempU.email),
-             currentAccountPicture: CircleAvatar(
-               backgroundImage: NetworkImage(photoUrl()),
-             ),
-             otherAccountsPictures: <Widget>[
-               CircleAvatar(
-                 backgroundColor: Colors.white,
-                 child: Icon(Icons.terrain,
-                 color: Colors.greenAccent,),
-               ),
-             ],
-           ),
+            UserAccountsDrawerHeader(
+              accountName: Text(displayName()),
+              accountEmail: Text(tempU.email),
+              currentAccountPicture: CircleAvatar(
+                backgroundImage: NetworkImage(photoUrl()),
+              ),
+              otherAccountsPictures: <Widget>[
+                CircleAvatar(
+                  backgroundColor: Colors.white,
+                  child: Icon(
+                    Icons.terrain,
+                    color: Colors.greenAccent,
+                  ),
+                ),
+              ],
+            ),
             ListTile(
               title: Text('Item 1'),
               onTap: () {

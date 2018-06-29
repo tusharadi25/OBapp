@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
+import 'package:ob_explorers/utils/nav.dart';
+import 'package:ob_explorers/utils/ob.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SignUpScreen extends StatefulWidget {
   static String tag = 'signup-page';
@@ -27,12 +32,24 @@ class _SignUpPageState extends State<SignUpScreen> {
   }
 
   final _fkey = GlobalKey<FormState>();
-  void validateAndSave() {
+  void validateAndSave() async {
     final form = _fkey.currentState;
     if (form.validate()) {
       form.save();
-      print("valid" +
-          "$_fn, $_add, $_em, $_psw, $_ph, $_ecpn, $_eph, $_yr, $sel");
+      FirebaseUser user = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(email: _em, password: _psw);
+      var tempU = user;
+      U.user = user;
+      Firestore.instance.collection('Udb').document('${tempU.uid}').setData({
+        'Name': '$_fn',
+        'Address': '$_add',
+        'Email': '$_em',
+        'Blood': '$sel',
+        'Phone': '$_ph',
+        'Emergency': {'Name': '$_ecpn', 'Phone': '$_eph', 'Relation': '$_yr'}
+      });
+      print("valid" + "$_fn, $_add, $_em, $_ph, $_ecpn, $_eph, $_yr, $sel");
+      MyNavigator.goToLogin(context);
     } else
       print("Invalid");
   }
@@ -54,7 +71,7 @@ class _SignUpPageState extends State<SignUpScreen> {
             padding: EdgeInsets.only(left: 24.0, right: 24.0),
             children: <Widget>[
               Padding(
-                padding: EdgeInsets.symmetric(vertical: 4.0),
+                padding: EdgeInsets.only(top: 10.0),
                 child: Text(
                   "Personal Info",
                   style: TextStyle(
@@ -64,7 +81,7 @@ class _SignUpPageState extends State<SignUpScreen> {
                 ),
               ),
               Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10.0),
+                  padding: EdgeInsets.symmetric(vertical: 0.0),
                   child: TextFormField(
                     validator: (value) =>
                         value.isEmpty ? 'Name Cannot be Empty' : null,
@@ -75,7 +92,7 @@ class _SignUpPageState extends State<SignUpScreen> {
                     ),
                   )),
               Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10.0),
+                  padding: EdgeInsets.symmetric(vertical: 0.0),
                   child: DropdownButton(
                     value: sel,
                     items: elements,
@@ -86,7 +103,7 @@ class _SignUpPageState extends State<SignUpScreen> {
                     },
                   )),
               Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10.0),
+                  padding: EdgeInsets.symmetric(vertical: 0.0),
                   child: TextFormField(
                     validator: (value) =>
                         value.isEmpty ? 'Address cannot be empty' : null,
@@ -107,7 +124,7 @@ class _SignUpPageState extends State<SignUpScreen> {
                 ),
               ),
               Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10.0),
+                  padding: EdgeInsets.symmetric(vertical: 0.0),
                   child: TextFormField(
                     validator: (value) =>
                         value.isEmpty ? 'Email-id Cannot be Empty' : null,
@@ -118,7 +135,7 @@ class _SignUpPageState extends State<SignUpScreen> {
                     ),
                   )),
               Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10.0),
+                  padding: EdgeInsets.symmetric(vertical: 0.0),
                   child: TextFormField(
                     validator: (value) =>
                         value.isEmpty ? 'Password Cannot be Empty' : null,
@@ -130,7 +147,7 @@ class _SignUpPageState extends State<SignUpScreen> {
                     ),
                   )),
               Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10.0),
+                  padding: EdgeInsets.symmetric(vertical: 0.0),
                   child: TextFormField(
                     validator: (value) =>
                         value.isEmpty ? 'Phone no. Cannot be Empty' : null,
@@ -152,7 +169,7 @@ class _SignUpPageState extends State<SignUpScreen> {
                 ),
               ),
               Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10.0),
+                  padding: EdgeInsets.symmetric(vertical: 0.0),
                   child: TextFormField(
                     validator: (value) =>
                         value.isEmpty ? 'Field Cannot be Empty' : null,
@@ -163,7 +180,7 @@ class _SignUpPageState extends State<SignUpScreen> {
                     ),
                   )),
               Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10.0),
+                  padding: EdgeInsets.symmetric(vertical: 0.0),
                   child: TextFormField(
                     validator: (value) =>
                         value.isEmpty ? 'Field Cannot be Empty' : null,
@@ -174,7 +191,7 @@ class _SignUpPageState extends State<SignUpScreen> {
                     ),
                   )),
               Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10.0),
+                  padding: EdgeInsets.symmetric(vertical: 0.0),
                   child: TextFormField(
                     validator: (value) =>
                         value.isEmpty ? 'Field Cannot be Empty' : null,
@@ -185,7 +202,7 @@ class _SignUpPageState extends State<SignUpScreen> {
                     ),
                   )),
               Padding(
-                padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 30.0),
+                padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 40.0),
                 child: Material(
                     borderRadius: BorderRadius.circular(30.0),
                     shadowColor: Colors.green,
@@ -196,8 +213,7 @@ class _SignUpPageState extends State<SignUpScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Icon(
-                            Icons.arrow_forward,
-                            size: 40.0,
+                            Icons.person_add,
                           ),
                           Text('  SUBMIT',
                               style: TextStyle(
