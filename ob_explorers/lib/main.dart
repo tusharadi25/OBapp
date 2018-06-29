@@ -19,10 +19,36 @@ var routes = <String, WidgetBuilder>{
 
 void main() => runApp(new MyApp());
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  AppState createState() => new AppState();
+}
+
+class AppState extends State<MyApp>{
+  final FirebaseMessaging _firebaseMessaging = new FirebaseMessaging();
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _firebaseMessaging.requestNotificationPermissions();
+
+    _firebaseMessaging.configure(
+      onMessage: (Map<String,dynamic> message){
+      },
+      onResume: (Map<String,dynamic> message){
+      },
+      onLaunch: (Map<String,dynamic> message){
+      },
+    );
+    _firebaseMessaging.getToken().then((token){
+      print(token);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    final FirebaseMessaging _firebaseMessaging = new FirebaseMessaging();
     return MaterialApp(
         theme: ThemeData(
             primaryColor: Colors.deepOrangeAccent,
