@@ -10,7 +10,7 @@ dependencies:
   firebase_analytics: ^1.0.1
   firebase_auth: ^0.5.11
   firebase_database: ^1.0.1
-  firebase_storage: ^0.3.7
+  shared_preferences: ^0.4.2
   firebase_messaging: ^1.0.3
 
 

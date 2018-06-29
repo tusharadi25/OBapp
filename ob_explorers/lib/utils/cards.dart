@@ -38,7 +38,16 @@ class MyHomePage extends StatelessWidget {
           ),
         ),
       );
-    } catch (e) {}
+    } catch (e) {
+      return CircleAvatar(
+        child: Text(
+          tempU.email.toString().substring(0, 1).toUpperCase(),
+          style: TextStyle(
+            fontSize: 32.0,
+          ),
+        ),
+      );
+    }
   }
 
   @override
