@@ -31,5 +31,11 @@ class MyNavigator {
   static void goToDev(BuildContext context) {
     Navigator.pushNamed(context, "/dev");
   }
+
+  static void goToGcreate(BuildContext context) {
+    Navigator.pushNamed(context, "/gc");
+  }
+
+
 }
 

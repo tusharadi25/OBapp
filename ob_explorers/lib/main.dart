@@ -5,6 +5,7 @@ import 'package:ob_explorers/pages/splash.dart';
 import 'package:ob_explorers/pages/start.dart';
 import 'package:ob_explorers/pages/signup.dart';
 import 'package:ob_explorers/pages/about.dart';
+import 'package:ob_explorers/pages/Gcreate.dart';
 import 'package:ob_explorers/pages/developers.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
@@ -15,6 +16,7 @@ var routes = <String, WidgetBuilder>{
   "/signup": (BuildContext context) => SignUpScreen(),
   "/about": (BuildContext context) => AboutScreen(),
   "/dev": (BuildContext context) => DevScreen(),
+  "/gc": (BuildContext context) => SignUp(),
 };
 
 void main() => runApp(new MyApp());

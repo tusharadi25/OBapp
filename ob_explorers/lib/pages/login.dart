@@ -4,6 +4,7 @@ import 'package:ob_explorers/utils/nav.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:async';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:ob_explorers/pages/Gcreate.dart';
 
 class LoginScreen extends StatefulWidget {
   static String tag = 'login-page';
@@ -102,6 +103,16 @@ class _LoginPageState extends State<LoginScreen> {
       onPressed: () {},
     );
 
+    void discri(){
+      var newU=true;
+      //TODO: check
+      if(newU)
+        MyNavigator.goToGcreate(context);
+      else
+        MyNavigator.goToHome(context);
+
+    }
+
     Future<FirebaseUser> _handleSignIn() async {
       GoogleSignInAccount googleUser = await _googleSignIn.signIn();
       GoogleSignInAuthentication googleAuth = await googleUser.authentication;
@@ -109,8 +120,8 @@ class _LoginPageState extends State<LoginScreen> {
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
-      print("signed in " + user.displayName);
       U.user = user;
+      print("signed in " + user.displayName);
       return user;
     }
 
@@ -141,7 +152,7 @@ class _LoginPageState extends State<LoginScreen> {
               minWidth: 200.0,
               height: 45.0,
               onPressed: () => _handleSignIn()
-                  .then((FirebaseUser user) => MyNavigator.goToHome(context))
+                  .then((FirebaseUser user) => discri() )
                   .catchError((e) => print(e)),
               color: Colors.lightBlueAccent,
               splashColor: Colors.greenAccent,
