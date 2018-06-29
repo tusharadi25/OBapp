@@ -74,6 +74,17 @@ class _LoginPageState extends State<LoginScreen> {
       },
     );
 
+    Future<FirebaseUser> _handleSignIn() async {
+      GoogleSignInAccount googleUser = await _googleSignIn.signIn();
+      GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+      FirebaseUser user = await _auth.signInWithGoogle(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+      print("signed in " + user.displayName);
+      return user;
+    }
+
     return Scaffold(
       backgroundColor: Colors.limeAccent[50],
       body: Container(
@@ -93,23 +104,8 @@ class _LoginPageState extends State<LoginScreen> {
             MaterialButton(
               minWidth: 200.0,
               height: 45.0,
-              onPressed: () {
-                Future<FirebaseUser> _handleSignIn() async {
-                  GoogleSignInAccount googleUser = await _googleSignIn.signIn();
-                  GoogleSignInAuthentication googleAuth =
-                      await googleUser.authentication;
-                  FirebaseUser user = await _auth.signInWithGoogle(
-                    accessToken: googleAuth.accessToken,
-                    idToken: googleAuth.idToken,
-                  );
-                  print("signed in " + user.displayName);
-                  MyNavigator.goToHome(context);
-                  return user;
-                }
+              onPressed:() =>_handleSignIn().then((FirebaseUser user) => MyNavigator.goToHome(context)).catchError((e) => print(e)),
 
-                var u = _handleSignIn();
-                print(u.toString());
-              },
               color: Colors.lightBlueAccent,
               splashColor: Colors.greenAccent,
               child: Text('Sign In with Google',
