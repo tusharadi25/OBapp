@@ -82,6 +82,7 @@ class _LoginPageState extends State<LoginScreen> {
         idToken: googleAuth.idToken,
       );
       print("signed in " + user.displayName);
+      U.user=user;
       return user;
     }
 

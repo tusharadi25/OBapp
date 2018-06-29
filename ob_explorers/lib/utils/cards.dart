@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ob_explorers/utils/nav.dart';
+import 'package:ob_explorers/utils/ob.dart';
 
 class MyHomePage extends StatelessWidget {
   const MyHomePage({Key key, this.title}) : super(key: key);
-
   final String title;
   @override
   Widget build(BuildContext context) {
+    var tempU=U.user;
     return new Scaffold(
       appBar: new AppBar(
         title: new Text(title),
