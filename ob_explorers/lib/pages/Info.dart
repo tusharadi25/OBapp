@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class InfoScreen extends StatelessWidget {
   final data;
   const InfoScreen({Key key, this.data}) : super(key: key);
+
   String findMonth(DateTime d) {
     int dout = d.month;
     switch (dout) {
@@ -37,7 +38,13 @@ class InfoScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<String> li = <String>[];
     int n = '\\n'.allMatches(data.data["Itinerary"]).length;
+    li = data.data["Itinerary"].split("\\n");
+    print(li.length);
+    print(li[0].trim());
+    print(li[1].trim());
+    print(li[2].trim());
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
@@ -269,7 +276,7 @@ class InfoScreen extends StatelessWidget {
                       child: Column(
                         children: <Widget>[
                           Text(
-                            "Mode Of Transport",
+                            "Transport",
                             style: TextStyle(fontSize: 16.0),
                           )
                         ],
@@ -341,6 +348,10 @@ class InfoScreen extends StatelessWidget {
               ],
             ),
           ),
+          ListView.builder(
+              shrinkWrap: true,
+              itemCount: li.length,
+              itemBuilder: (_, index) => Text(li[index])),
           Padding(
             padding:
                 const EdgeInsets.symmetric(horizontal: 14.0, vertical: 8.0),
@@ -349,8 +360,26 @@ class InfoScreen extends StatelessWidget {
               style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
             ),
           ),
-          Text("Hello" + data.data["Itinerary"].split("\\n")[0] + "!#"),
+          /*
+    Text("Hello" + data.data["Itinerary"].split("\\n")[0] + "!#"),
           Text(n.toString()),
+          Text(
+            li.toString().replaceAll(',', '\n'),
+            style: TextStyle(fontSize: 14.0),
+          )*/
+          /*ListView.builder(
+              itemCount: 2,
+              itemBuilder: (BuildContext context, int index) {
+                return Card(
+                    child: Container(
+                  child: Column(
+                    children: <Widget>[
+                      new Text("$index"),
+                    ],
+                  ),
+                ));
+              }),
+    */
           /*
           iternary,
           trekcost,
