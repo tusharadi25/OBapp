@@ -12,18 +12,26 @@ class MyHomePage extends StatelessWidget {
     return new Scaffold(
       appBar: new AppBar(
         title: new Text(title),
-        elevation: 4.0,
+        elevation: 5.0,
       ),
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-            DrawerHeader(
-              child: Text('Drawer Header'),
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-            ),
+           UserAccountsDrawerHeader(
+             accountName: Text(tempU.displayName),
+             accountEmail: Text(tempU.email),
+             currentAccountPicture: CircleAvatar(
+               backgroundImage: NetworkImage(tempU.photoUrl),
+             ),
+             otherAccountsPictures: <Widget>[
+               CircleAvatar(
+                 backgroundColor: Colors.white,
+                 child: Icon(Icons.terrain,
+                 color: Colors.greenAccent,),
+               ),
+             ],
+           ),
             ListTile(
               title: Text('Item 1'),
               onTap: () {
