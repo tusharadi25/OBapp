@@ -157,7 +157,7 @@ packages:
       name: google_sign_in
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.3.1"
+    version: "3.0.4"
   html:
     dependency: transitive
     description:

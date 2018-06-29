@@ -22,7 +22,7 @@
   [FirebaseDatabasePlugin registerWithRegistrar:[registry registrarForPlugin:@"FirebaseDatabasePlugin"]];
   [FirebaseMessagingPlugin registerWithRegistrar:[registry registrarForPlugin:@"FirebaseMessagingPlugin"]];
   [FirebaseStoragePlugin registerWithRegistrar:[registry registrarForPlugin:@"FirebaseStoragePlugin"]];
-  [GoogleSignInPlugin registerWithRegistrar:[registry registrarForPlugin:@"GoogleSignInPlugin"]];
+  [FLTGoogleSignInPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTGoogleSignInPlugin"]];
 }
 
 @end
