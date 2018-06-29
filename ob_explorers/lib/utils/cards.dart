@@ -4,11 +4,34 @@ import 'package:ob_explorers/utils/nav.dart';
 import 'package:ob_explorers/utils/ob.dart';
 
 class MyHomePage extends StatelessWidget {
-  const MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key key, this.title}) : super(key: key);
   final String title;
+  var tempU=U.user;
+
+  String disaplayName(){
+    var dn;
+    try{
+      dn = tempU.disaplayName;
+      return tempU.disaplayName;
+    } catch (e){
+      return tempU.email;
+    }
+  }
+  String photoUrl(){
+    var pu;
+    try{
+      pu=tempU.photoUrl;
+      if(pu!=null) {
+        return tempU.photoUrl;
+      }
+      return "https://firebasestorage.googleapis.com/v0/b/offbeat-explorers-adi25.appspot.com/o/default-user.png?alt=media&token=4be80f32-a3cf-4e5c-a49e-5244f8106c09";
+
+    } catch (e){
+      return "https://firebasestorage.googleapis.com/v0/b/offbeat-explorers-adi25.appspot.com/o/default-user.png?alt=media&token=4be80f32-a3cf-4e5c-a49e-5244f8106c09";
+    }
+  }
   @override
   Widget build(BuildContext context) {
-    var tempU=U.user;
     return new Scaffold(
       appBar: new AppBar(
         title: new Text(title),
@@ -19,10 +42,10 @@ class MyHomePage extends StatelessWidget {
           padding: EdgeInsets.zero,
           children: <Widget>[
            UserAccountsDrawerHeader(
-             accountName: Text(tempU.displayName),
+             accountName: Text(disaplayName()),
              accountEmail: Text(tempU.email),
              currentAccountPicture: CircleAvatar(
-               backgroundImage: NetworkImage(tempU.photoUrl),
+               backgroundImage: NetworkImage(photoUrl()),
              ),
              otherAccountsPictures: <Widget>[
                CircleAvatar(

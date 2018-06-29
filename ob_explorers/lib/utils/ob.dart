@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 class ob{
   static const String name = "Offbeat Explorers";
   static const String tagline = "Nature lovers and\nTrekking enthusiasts";
@@ -8,6 +9,7 @@ class ob{
 }
 
 
-class U {
-  static var user = null;
+class U{
+  static var user;
+
 }
