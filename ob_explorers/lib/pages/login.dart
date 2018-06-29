@@ -18,26 +18,27 @@ class _LoginPageState extends State<LoginScreen> {
   final fkey = new GlobalKey<FormState>();
   bool validateAndSave() {
     final form = fkey.currentState;
-    if(form.validate()){
+    if (form.validate()) {
       form.save();
       print('Valid');
       return true;
-    } else{
+    } else {
       print('Invalid');
       return false;
     }
   }
 
-  void validateAndSubmit() async{
-    if(validateAndSave()){
-      try{
-      FirebaseUser user = await FirebaseAuth.instance.signInWithEmailAndPassword(email: _email, password: _pswd);
-      print('Signed in');
-      if (user.email==_email){
-        U.user=user;
-        MyNavigator.goToHome(context);
-      }
-    } catch(e){
+  void validateAndSubmit() async {
+    if (validateAndSave()) {
+      try {
+        FirebaseUser user = await FirebaseAuth.instance
+            .signInWithEmailAndPassword(email: _email, password: _pswd);
+        print('Signed in');
+        if (user.email == _email) {
+          U.user = user;
+          MyNavigator.goToHome(context);
+        }
+      } catch (e) {
         print(e.toString());
       }
     }
@@ -59,8 +60,8 @@ class _LoginPageState extends State<LoginScreen> {
     final email = TextFormField(
       keyboardType: TextInputType.emailAddress,
       autofocus: false,
-      onSaved:(value)=> _email= value,
-      validator: (value)=>value.isEmpty? 'Email can\'t be empty':null,
+      onSaved: (value) => _email = value.trim(),
+      validator: (value) => value.isEmpty ? 'Email can\'t be empty' : null,
       decoration: InputDecoration(
         labelText: 'Email',
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
@@ -70,8 +71,8 @@ class _LoginPageState extends State<LoginScreen> {
     final password = TextFormField(
       autofocus: false,
       obscureText: true,
-      onSaved:(value)=> _pswd= value,
-      validator: (value)=>value.isEmpty? 'Password can\'t be empty':null,
+      onSaved: (value) => _pswd = value,
+      validator: (value) => value.isEmpty ? 'Password can\'t be empty' : null,
       decoration: InputDecoration(
         labelText: 'Password',
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
@@ -103,14 +104,13 @@ class _LoginPageState extends State<LoginScreen> {
       onPressed: () {},
     );
 
-    void discri(){
-      var newU=true;
+    void discri() {
+      var newU = true;
       //TODO: check
-      if(newU)
+      if (newU)
         MyNavigator.goToGcreate(context);
       else
         MyNavigator.goToHome(context);
-
     }
 
     Future<FirebaseUser> _handleSignIn() async {
@@ -152,7 +152,7 @@ class _LoginPageState extends State<LoginScreen> {
               minWidth: 200.0,
               height: 45.0,
               onPressed: () => _handleSignIn()
-                  .then((FirebaseUser user) => discri() )
+                  .then((FirebaseUser user) => discri())
                   .catchError((e) => print(e)),
               color: Colors.lightBlueAccent,
               splashColor: Colors.greenAccent,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ob_explorers/utils/ob.dart';
+import 'package:ob_explorers/utils/nav.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SignUp extends StatefulWidget {
@@ -36,12 +37,13 @@ class _SignUpState extends State<SignUp> {
       Firestore.instance.collection('Udb').document('${tempU.uid}').setData({
         'Name': '$_fn',
         'Address': '$_add',
-        'Email': '$_em',
+        'Email': '${_em.trim()}',
         'Blood': '$sel',
         'Phone': '$_ph',
         'Emergency': {'Name': '$_ecpn', 'Phone': '$_eph', 'Relation': '$_yr'}
       });
       print("valid" + "$_fn, $_add, $_em, $_ph, $_ecpn, $_eph, $_yr, $sel");
+      MyNavigator.goToHome(context);
     } else
       print("Invalid");
   }

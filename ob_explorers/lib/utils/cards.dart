@@ -20,24 +20,25 @@ class MyHomePage extends StatelessWidget {
       return tempU.email;
     }
   }
-  Widget photoUrl(){
+
+  Widget photoUrl() {
     var pu;
-    try{
-      pu=tempU.photoUrl;
-      if(pu!=null) {
-        return  CircleAvatar(
+    try {
+      pu = tempU.photoUrl;
+      if (pu != null) {
+        return CircleAvatar(
           backgroundImage: NetworkImage(tempU.photoUrl),
         );
       }
       return CircleAvatar(
-        child: Text(tempU.email.toString().substring(0,1).toUpperCase(),
-        style: TextStyle(
-          fontSize: 32.0,
-        ),),
+        child: Text(
+          tempU.email.toString().substring(0, 1).toUpperCase(),
+          style: TextStyle(
+            fontSize: 32.0,
+          ),
+        ),
       );
-    } catch (e){
-
-    }
+    } catch (e) {}
   }
 
   @override
@@ -51,12 +52,15 @@ class MyHomePage extends StatelessWidget {
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-           UserAccountsDrawerHeader(
-             decoration:BoxDecoration(image:DecorationImage(image:NetworkImage("https://firebasestorage.googleapis.com/v0/b/offbeat-explorers-adi25.appspot.com/o/bg.jpg?alt=media&token=1a103ab2-66af-41cf-86e9-379f09e9d15c"))),
-             accountName: Text(disaplayName()),
-             accountEmail: Text(tempU.email),
-             currentAccountPicture: photoUrl(),
-           ),
+            UserAccountsDrawerHeader(
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: NetworkImage(
+                          "https://firebasestorage.googleapis.com/v0/b/offbeat-explorers-adi25.appspot.com/o/bg.jpg?alt=media&token=1a103ab2-66af-41cf-86e9-379f09e9d15c"))),
+              accountName: Text(displayName()),
+              accountEmail: Text(tempU.email),
+              currentAccountPicture: photoUrl(),
+            ),
             ListTile(
               title: Text('Item 1'),
               onTap: () {
@@ -86,6 +90,7 @@ class MyHomePage extends StatelessWidget {
                   title: Text('SignOut'),
                   trailing: Icon(Icons.exit_to_app),
                   onTap: () {
+                    Navigator.pop(context);
                     Navigator.pop(context);
                     Navigator.pop(context);
                   },

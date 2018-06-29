@@ -43,7 +43,7 @@ class _SignUpPageState extends State<SignUpScreen> {
       Firestore.instance.collection('Udb').document('${tempU.uid}').setData({
         'Name': '$_fn',
         'Address': '$_add',
-        'Email': '$_em',
+        'Email': '${_em.trim()}',
         'Blood': '$sel',
         'Phone': '$_ph',
         'Emergency': {'Name': '$_ecpn', 'Phone': '$_eph', 'Relation': '$_yr'}
