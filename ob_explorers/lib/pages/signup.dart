@@ -71,7 +71,7 @@ class _SignUpPageState extends State<SignUpScreen> {
                     onSaved: (value) => _fn = value,
                     keyboardType: TextInputType.text,
                     decoration: InputDecoration(
-                      hintText: "Full Name",
+                      labelText: "Full Name",
                     ),
                   )),
               Padding(
@@ -93,7 +93,7 @@ class _SignUpPageState extends State<SignUpScreen> {
                     onSaved: (value) => _add = value,
                     keyboardType: TextInputType.text,
                     decoration: InputDecoration(
-                      hintText: "Address",
+                      labelText: "Address",
                     ),
                   )),
               Padding(
@@ -114,7 +114,7 @@ class _SignUpPageState extends State<SignUpScreen> {
                     onSaved: (value) => _em = value,
                     keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
-                      hintText: "Email Address",
+                      labelText: "Email Address",
                     ),
                   )),
               Padding(
@@ -126,7 +126,7 @@ class _SignUpPageState extends State<SignUpScreen> {
                     obscureText: true,
                     keyboardType: TextInputType.text,
                     decoration: InputDecoration(
-                      hintText: "Your Password",
+                      labelText: "Your Password",
                     ),
                   )),
               Padding(
@@ -138,7 +138,7 @@ class _SignUpPageState extends State<SignUpScreen> {
                     keyboardType: TextInputType.number,
                     maxLength: 10,
                     decoration: InputDecoration(
-                      hintText: "Phone No.",
+                      labelText: "Phone No.",
                     ),
                   )),
               Padding(
@@ -159,7 +159,7 @@ class _SignUpPageState extends State<SignUpScreen> {
                     onSaved: (value) => _ecpn = value,
                     keyboardType: TextInputType.text,
                     decoration: InputDecoration(
-                      hintText: "Emergency Contact Person Name",
+                      labelText: "Emergency Contact Person Name",
                     ),
                   )),
               Padding(
@@ -170,7 +170,7 @@ class _SignUpPageState extends State<SignUpScreen> {
                     onSaved: (value) => _eph = value,
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
-                       hintText: "Phone No.",
+                      labelText: "Phone No.",
                     ),
                   )),
               Padding(
@@ -181,7 +181,7 @@ class _SignUpPageState extends State<SignUpScreen> {
                     onSaved: (value) => _yr = value,
                     keyboardType: TextInputType.text,
                     decoration: InputDecoration(
-                      hintText: "Your Relation",
+                      labelText: "Your Relation",
                     ),
                   )),
               Padding(

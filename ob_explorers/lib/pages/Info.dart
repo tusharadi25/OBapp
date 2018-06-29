@@ -41,10 +41,8 @@ class InfoScreen extends StatelessWidget {
     List<String> li = <String>[];
     int n = '\\n'.allMatches(data.data["Itinerary"]).length;
     li = data.data["Itinerary"].split("\\n");
-    print(li.length);
-    print(li[0].trim());
-    print(li[1].trim());
-    print(li[2].trim());
+    String start = li[0];
+    li.removeAt(0);
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
@@ -348,10 +346,6 @@ class InfoScreen extends StatelessWidget {
               ],
             ),
           ),
-          ListView.builder(
-              shrinkWrap: true,
-              itemCount: li.length,
-              itemBuilder: (_, index) => Text(li[index])),
           Padding(
             padding:
                 const EdgeInsets.symmetric(horizontal: 14.0, vertical: 8.0),
@@ -360,26 +354,30 @@ class InfoScreen extends StatelessWidget {
               style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
             ),
           ),
-          /*
-    Text("Hello" + data.data["Itinerary"].split("\\n")[0] + "!#"),
-          Text(n.toString()),
-          Text(
-            li.toString().replaceAll(',', '\n'),
-            style: TextStyle(fontSize: 14.0),
-          )*/
-          /*ListView.builder(
-              itemCount: 2,
-              itemBuilder: (BuildContext context, int index) {
-                return Card(
-                    child: Container(
-                  child: Column(
-                    children: <Widget>[
-                      new Text("$index"),
-                    ],
-                  ),
-                ));
-              }),
-    */
+          Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 14.0, vertical: 8.0),
+            child: Text(
+              start,
+              style: TextStyle(fontSize: 18.0),
+              textAlign: TextAlign.justify,
+            ),
+          ),
+          ListView.builder(
+              shrinkWrap: true,
+              itemCount: li.length,
+              itemBuilder: (_, index) => Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: ListTile(
+                      contentPadding: EdgeInsets.all(0.0),
+                      leading: Icon(Icons.add),
+                      title: Text(
+                        li[index].trim(),
+                        style: TextStyle(fontSize: 16.0),
+                        textAlign: TextAlign.justify,
+                      ),
+                    ),
+                  )),
           /*
           iternary,
           trekcost,
