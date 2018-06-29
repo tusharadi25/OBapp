@@ -20,9 +20,13 @@ class AboutScreen extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(top: 10.0),
           ),
-          Text(
-            ob.ab,
-            textAlign: TextAlign.justify,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: Text(
+              ob.ab,
+              style: TextStyle(fontSize: 16.0),
+              textAlign: TextAlign.justify,
+            ),
           ),
           Image.network('https://firebasestorage.googleapis.com/v0/b/offbeat-explorers-adi25.appspot.com/o/36285168_2192848810936349_5408265760206225408_n.jpg?alt=media&token=e5094ec8-6f1b-4f8e-a437-9af6ebde7f9e',
           fit: BoxFit.fitWidth )

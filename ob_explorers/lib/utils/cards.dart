@@ -11,23 +11,32 @@ class MyHomePage extends StatelessWidget {
   String disaplayName(){
     var dn;
     try{
-      dn = tempU.disaplayName;
-      return tempU.disaplayName;
+      dn = tempU.displayName;
+      if(dn!=null) {
+        return tempU.displayName;
+      }
+      return tempU.email;
     } catch (e){
       return tempU.email;
     }
   }
-  String photoUrl(){
+  Widget photoUrl(){
     var pu;
     try{
       pu=tempU.photoUrl;
       if(pu!=null) {
-        return tempU.photoUrl;
+        return  CircleAvatar(
+          backgroundImage: NetworkImage(tempU.photoUrl),
+        );
       }
-      return "https://firebasestorage.googleapis.com/v0/b/offbeat-explorers-adi25.appspot.com/o/default-user.png?alt=media&token=4be80f32-a3cf-4e5c-a49e-5244f8106c09";
-
+      return CircleAvatar(
+        child: Text(tempU.email.toString().substring(0,1).toUpperCase(),
+        style: TextStyle(
+          fontSize: 32.0,
+        ),),
+      );
     } catch (e){
-      return "https://firebasestorage.googleapis.com/v0/b/offbeat-explorers-adi25.appspot.com/o/default-user.png?alt=media&token=4be80f32-a3cf-4e5c-a49e-5244f8106c09";
+
     }
   }
   @override
@@ -42,18 +51,10 @@ class MyHomePage extends StatelessWidget {
           padding: EdgeInsets.zero,
           children: <Widget>[
            UserAccountsDrawerHeader(
+             decoration:BoxDecoration(image:DecorationImage(image:NetworkImage("https://firebasestorage.googleapis.com/v0/b/offbeat-explorers-adi25.appspot.com/o/bg.jpg?alt=media&token=1a103ab2-66af-41cf-86e9-379f09e9d15c"))),
              accountName: Text(disaplayName()),
              accountEmail: Text(tempU.email),
-             currentAccountPicture: CircleAvatar(
-               backgroundImage: NetworkImage(photoUrl()),
-             ),
-             otherAccountsPictures: <Widget>[
-               CircleAvatar(
-                 backgroundColor: Colors.white,
-                 child: Icon(Icons.terrain,
-                 color: Colors.greenAccent,),
-               ),
-             ],
+             currentAccountPicture: photoUrl(),
            ),
             ListTile(
               title: Text('Item 1'),
@@ -70,8 +71,8 @@ class MyHomePage extends StatelessWidget {
               },
             ),
             ListTile(
-              title: Text('Developers'),
-              trailing: Icon(Icons.developer_mode),
+              title: Text('Creaters'),
+              trailing: Icon(Icons.create),
               onTap: () {
                 Navigator.pop(context);
                 MyNavigator.goToDev(context);
