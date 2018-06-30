@@ -26,9 +26,8 @@ class MyApp extends StatefulWidget {
   AppState createState() => new AppState();
 }
 
-class AppState extends State<MyApp>{
+class AppState extends State<MyApp> {
   final FirebaseMessaging _firebaseMessaging = new FirebaseMessaging();
-
 
   @override
   void initState() {
@@ -37,14 +36,11 @@ class AppState extends State<MyApp>{
     _firebaseMessaging.requestNotificationPermissions();
 
     _firebaseMessaging.configure(
-      onMessage: (Map<String,dynamic> message){
-      },
-      onResume: (Map<String,dynamic> message){
-      },
-      onLaunch: (Map<String,dynamic> message){
-      },
+      onMessage: (Map<String, dynamic> message) {},
+      onResume: (Map<String, dynamic> message) {},
+      onLaunch: (Map<String, dynamic> message) {},
     );
-    _firebaseMessaging.getToken().then((token){
+    _firebaseMessaging.getToken().then((token) {
       print(token);
     });
   }

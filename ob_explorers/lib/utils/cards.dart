@@ -308,7 +308,9 @@ class MyCard extends StatelessWidget {
                         color: Colors.white,
                       ),
                     ),
-                    onPressed: () {/* ... */},
+                    onPressed: () {
+                      MyNavigator.goToReg(context, data);
+                    },
                   ),
                 ],
               ),
