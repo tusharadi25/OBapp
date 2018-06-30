@@ -27,7 +27,6 @@ class MyNavigator {
       );
     }));
   }
-
   static void goToAbout(BuildContext context) {
     Navigator.pushNamed(context, "/about");
   }
@@ -40,6 +39,11 @@ class MyNavigator {
     Navigator.pushNamed(context, "/gc");
   }
 
+  static void error(BuildContext context) {
+    Navigator.pushNamed(context, "/error");
+  }
+
+
   static void goToReg(BuildContext context, var data) {
     Navigator.of(context).push(new PageRouteBuilder(
         pageBuilder: (context, animation, secondaryAnimation) {
@@ -49,3 +53,4 @@ class MyNavigator {
     }));
   }
 }
+

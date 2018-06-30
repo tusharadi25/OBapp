@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:ob_explorers/utils/ob.dart';
 import 'package:ob_explorers/utils/nav.dart';
+import 'package:connectivity/connectivity.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -9,11 +10,26 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+
+  Future<bool> netcheck() async{
+    var connectivityResult = await (new Connectivity().checkConnectivity());
+    if(connectivityResult==ConnectivityResult.mobile || connectivityResult == ConnectivityResult.wifi)
+      return true;
+    else return false;
+  }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    Timer(Duration(seconds: 5), () => MyNavigator.goToStart(context));
+    Timer(Duration(seconds: 4), (){
+      netcheck().then((bool a ){
+        if(a)
+          MyNavigator.goToStart(context);
+        else
+          MyNavigator.error(context);
+      } ).catchError((e)=>{} );
+    });
   }
 
   @override
