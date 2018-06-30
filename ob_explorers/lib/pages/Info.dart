@@ -512,6 +512,7 @@ class InfoScreen extends StatelessWidget {
                     style: TextStyle(
                       color: Colors.grey,
                     ),
+
                   ),
                   onPressed: () {MyNavigator.goToContact(context);},
                 ),
