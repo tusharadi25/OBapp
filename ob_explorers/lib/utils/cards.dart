@@ -111,7 +111,7 @@ class MyHomePage extends StatelessWidget {
         ),
       ),
       body: new StreamBuilder(
-          stream: Firestore.instance.collection('Trips').snapshots(),
+          stream: Firestore.instance.collection('Trips').orderBy("SDate",descending: true).snapshots(),
           builder: (context, snapshot) {
             if (!snapshot.hasData)
               return new Container(

@@ -36,16 +36,33 @@ class AppState extends State<MyApp> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _firebaseMessaging.requestNotificationPermissions();
+    _firebaseMessaging
+        .requestNotificationPermissions(const IosNotificationSettings(
+      sound: true,
+      alert: true,
+      badge: true,
+    )
+    );
+
+    _firebaseMessaging.onIosSettingsRegistered
+        .listen((IosNotificationSettings setting) {
+          print("Ios");
+    });
 
     _firebaseMessaging.configure(
-      onMessage: (Map<String, dynamic> message) {},
-      onResume: (Map<String, dynamic> message) {},
-      onLaunch: (Map<String, dynamic> message) {},
+      onLaunch: (Map<String, dynamic> message) {
+        print('onLaunch');
+      },
+      onResume: (Map<String, dynamic> message) {
+        print('onResume');
+      },
+      onMessage: (Map<String, dynamic> message) {
+        print('onMessage');
+      },
     );
     _firebaseMessaging.getToken().then((token) {
       print(token);
-      U.token=token;
+      U.token = token;
     });
   }
 
