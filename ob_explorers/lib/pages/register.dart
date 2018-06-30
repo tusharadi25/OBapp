@@ -19,63 +19,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
     form.save();
     if (form.validate()) if (sel != null) {
       print("valid" + "$_bm,$_cc,$_prn,$_od,$sel");
-      var attendies = U.data.data["Attendies"];
-      var n = attendies.length;
-      /*attendies.add({
-        'Uid': 'Udb/${U.user.uid}',
-        'VehicleType': '$sel',
-        'Model': '$_bm',
-        'CC': '$_cc',
-        'Pillion': '$_prn',
-        'Other': '$_od'
-      });*/
-      print(n);
-      /*var temp = new List<Object>.from(attendies);
-      temp.add({
-        'Uid': 'Udb/${U.user.uid}',
-        'VehicleType': '$sel',
-        'Model': '$_bm',
-        'CC': '$_cc',
-        'Pillion': '$_prn',
-        'Other': '$_od'
-      });*/
-      //print(attendies[n]);
-      /*
       Firestore.instance
-          .collection('Trip')
-          .document('${U.data.documentID}')
-          .updateData({
-        'Attendies': {
+          .collection('Attendies')
+          .document('${U.data.data["SDate"]}')
+          .setData({
+        '${U.user.email}': {
           'Uid': 'Udb/${U.user.uid}',
           'VehicleType': '$sel',
           'Model': '$_bm',
           'CC': '$_cc',
           'Pillion': '$_prn',
           'Other': '$_od'
-        }
-      });
-      */
-      DocumentReference c =
-          Firestore.instance.collection('Trips').document(U.data.documentID);
-      String x = U.data.documentID;
-      var y = Firestore.instance
-          .collection('Trips')
-          .document(x)
-          .get()
-          .then((DocumentSnapshot d) {
-        var temp = new List<Object>.from(d["Attendies"]);
-        print(d["Attendies"]);
-        temp.add({
-          'Uid': 'Udb/${U.user.uid}',
-          'VehicleType': '$sel',
-          'Model': '$_bm',
-          'CC': '$_cc',
-          'Pillion': '$_prn',
-          'Other': '$_od'
-        });
-        Firestore.instance.collection('Trips').document(x).updateData();
-      });
-      //Firestore.instance.collection('Trip').document('${U.data.documentID}')["Attendies"];
+        },
+      }, merge: true);
     } else
       print("Invalid");
   }
