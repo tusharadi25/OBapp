@@ -18,7 +18,7 @@ var routes = <String, WidgetBuilder>{
   "/about": (BuildContext context) => AboutScreen(),
   "/dev": (BuildContext context) => DevScreen(),
   "/gc": (BuildContext context) => SignUp(),
-  "/error": (BuildContext context) => Error(),
+  "/error": (BuildContext context) => error(),
 };
 
 void main() => runApp(new MyApp());
@@ -45,18 +45,17 @@ class AppState extends State<MyApp> {
     _firebaseMessaging.getToken().then((token) {
       print(token);
     });
-
   }
 
   @override
   Widget build(BuildContext context) {
-      return MaterialApp(
-          theme: ThemeData(
-              primaryColor: Colors.deepOrangeAccent,
-              accentColor: Colors.white,
-              fontFamily: 'Roboto-Regular'),
-          debugShowCheckedModeBanner: false,
-          home: SplashScreen(),
-          routes: routes);
+    return MaterialApp(
+        theme: ThemeData(
+            primaryColor: Colors.deepOrangeAccent,
+            accentColor: Colors.white,
+            fontFamily: 'Roboto-Regular'),
+        debugShowCheckedModeBanner: false,
+        home: SplashScreen(),
+        routes: routes);
   }
 }
