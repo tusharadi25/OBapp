@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ob_explorers/utils/ob.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ob_explorers/utils/nav.dart';
 
 class RegisterScreen extends StatefulWidget {
   var data;
@@ -32,6 +33,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           'Other': '$_od'
         },
       }, merge: true);
+      MyNavigator.success(context);
     } else
       print("Invalid");
   }
@@ -59,7 +61,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
               child: Column(
                 children: <Widget>[
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 14.0),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 14.0, horizontal: 10.0),
                     child: Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -88,7 +91,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
             ),
             Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: EdgeInsets.symmetric(horizontal: 20.0),
                 child: DropdownButton(
                   value: sel,
                   items: elements,
@@ -99,7 +102,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   },
                 )),
             Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: EdgeInsets.symmetric(horizontal: 20.0),
                 child: TextFormField(
                   onSaved: (value) => _bm = value,
                   keyboardType: TextInputType.text,
@@ -108,7 +111,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                 )),
             Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: EdgeInsets.symmetric(horizontal: 20.0),
                 child: TextFormField(
                   onSaved: (value) => _cc = value,
                   keyboardType: TextInputType.number,
@@ -117,7 +120,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                 )),
             Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: EdgeInsets.symmetric(horizontal: 20.0),
                 child: TextFormField(
                   onSaved: (value) => _prn = value,
                   keyboardType: TextInputType.text,
@@ -126,9 +129,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                 )),
             Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: EdgeInsets.symmetric(horizontal: 20.0),
                 child: TextFormField(
-                  maxLines: 3,
+                  maxLines: 4,
+                  maxLengthEnforced: false,
                   onSaved: (value) => _od = value,
                   keyboardType: TextInputType.multiline,
                   decoration: InputDecoration(
@@ -136,7 +140,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                 )),
             Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: EdgeInsets.symmetric(horizontal: 20.0,vertical: 5.0),
               child: Text(
                 ob.dec,
                 style: TextStyle(fontSize: 16.0),
@@ -157,6 +161,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         Icon(
                           Icons.person_add,
                         ),
+                        Padding(padding: EdgeInsets.symmetric(horizontal:5.0),),
                         Text('Accept And Continue',
                             style:
                                 TextStyle(color: Colors.black, fontSize: 20.0)),

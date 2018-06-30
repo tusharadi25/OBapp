@@ -21,6 +21,11 @@ class MyNavigator {
     Navigator.pushNamed(context, "/signup");
   }
 
+  static void success(BuildContext context) {
+    Navigator.pushNamed(context, "/success");
+  }
+
+
   static void showInfo(BuildContext context, var data) {
     Navigator.of(context).push(new PageRouteBuilder(
         pageBuilder: (context, animation, secondaryAnimation) {

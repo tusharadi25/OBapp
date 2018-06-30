@@ -10,6 +10,7 @@ import 'package:ob_explorers/pages/Gcreate.dart';
 import 'package:ob_explorers/pages/developers.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:ob_explorers/pages/error.dart';
+import 'package:ob_explorers/pages/success.dart';
 
 var routes = <String, WidgetBuilder>{
   "/home": (BuildContext context) => HomeScreen(),
@@ -20,6 +21,7 @@ var routes = <String, WidgetBuilder>{
   "/dev": (BuildContext context) => DevScreen(),
   "/gc": (BuildContext context) => SignUp(),
   "/error": (BuildContext context) => error(),
+  "/success": (BuildContext context)=> SuccessScreen(),
 };
 
 void main() => runApp(new MyApp());
