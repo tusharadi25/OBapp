@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ob_explorers/pages/Info.dart';
 import 'package:ob_explorers/pages/register.dart';
+import 'package:ob_explorers/pages/locations.dart';
 
 class MyNavigator {
   static void goToHome(BuildContext context) {
@@ -23,6 +24,14 @@ class MyNavigator {
     Navigator.pushNamed(context, "/signup");
   }
 
+  static void goToLocation(BuildContext context) {
+    Navigator.pushNamed(context, "/loc");
+  }
+
+  static void showNotification(BuildContext context) {
+    Navigator.pushNamed(context, "/notify");
+  }
+
   static void success(BuildContext context) {
     Navigator.pushNamed(context, "/success");
   }
@@ -36,6 +45,14 @@ class MyNavigator {
       );
     }));
   }
+
+  static void showLoc(BuildContext context, var d) {
+    Navigator.of(context).push(new PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) {
+          return Loc(d: d,);
+        }));
+  }
+
 
   static void goToAbout(BuildContext context) {
     Navigator.pushNamed(context, "/about");

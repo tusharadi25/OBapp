@@ -102,7 +102,8 @@ class ContactScreen extends StatelessWidget {
                             padding: EdgeInsets.symmetric(horizontal: 10.0),
                           ),
                           Text(
-                            "https://www.facebook.com/pages/Offbeat-Explorers",
+                            "https://www.facebook.com/pages/\nOffbeat-Explorers",
+                            softWrap: true,
                             textScaleFactor: 0.9,
                             style: TextStyle(fontSize: 16.0),
                           )

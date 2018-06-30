@@ -1,61 +1,135 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ob_explorers/utils/nav.dart';
-import 'package:ob_explorers/utils/ob.dart';
 
-class InfoScreen extends StatelessWidget {
-  final data;
-  const InfoScreen({Key key, this.data}) : super(key: key);
-
-  String findMonth(DateTime d) {
-    int dout = d.month;
-    switch (dout) {
-      case 1:
-        return "Jan";
-      case 2:
-        return "Feb";
-      case 3:
-        return "Mar";
-      case 4:
-        return "Apr";
-      case 5:
-        return "May";
-      case 6:
-        return "June";
-      case 7:
-        return "July";
-      case 8:
-        return "Aug";
-      case 9:
-        return "Sept";
-      case 10:
-        return "Oct";
-      case 11:
-        return "Nov";
-      case 12:
-        return "Dec";
-      default:
-        return "Error";
-    }
+class LocationScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Places To Visit"),
+      ),
+      body: new StreamBuilder(
+          stream: Firestore.instance
+              .collection("Locations")
+              .orderBy("Distance")
+              .snapshots(),
+          builder: (context, snapshot) {
+            if (!snapshot.hasData)
+              return new Container(
+                color: Colors.green[200],
+                child: Center(
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Image.asset(
+                          "assets/Fort.png",
+                          width: 200.0,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.all(10.0),
+                          child: Text("Loading...."),
+                        ),
+                        CircularProgressIndicator(),
+                      ]),
+                ),
+              );
+            return new ListView.builder(
+                physics: const AlwaysScrollableScrollPhysics(),
+                itemCount: snapshot.data.documents.length,
+                padding: const EdgeInsets.only(top: 10.0, bottom: 20.0),
+                itemBuilder: (context, index) {
+                  DocumentSnapshot ds = snapshot.data.documents[index];
+                  return MyNotification(d: ds);
+                });
+          }),
+    );
   }
+}
+
+class MyNotification extends StatelessWidget {
+  final d;
+  const MyNotification({Key key, this.d}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      color: Colors.white,
+      elevation: 4.0,
+      child: Padding(
+        padding: EdgeInsets.all(10.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.max,
+          children: <Widget>[
+            FlatButton(
+              child: Container(
+                height: 150.0,
+                child: Stack(
+                  fit: StackFit.expand,
+                  children: <Widget>[
+                    Image.network(
+                      d.data["Image"],
+                      fit: BoxFit.cover,
+                    )
+                  ],
+                ),
+              ),
+              padding: EdgeInsets.all(0.0),
+              onPressed: () => MyNavigator.showLoc(context, d),
+            ),
+            ListTile(
+              contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
+                title: Text(
+                  d.data["Name"].toString().toUpperCase(),
+                  style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+                ),
+                onTap: () => MyNavigator.showLoc(context, d)),
+            Divider(),
+            Container(
+              padding: EdgeInsets.symmetric(vertical: 10.0),
+              child: Column(
+                children: <Widget>[
+                  Row(
+
+                    children: <Widget>[
+                      Text(d.data["Height"].toString() + 'm'),
+                      Padding(
+                        padding: EdgeInsets.only(left: 10.0),
+                      ),
+                      Text(d.data["Time"]),
+                    ],
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 5.0),
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Text(d.data["Distance"].toString() + 'KM'),
+                      Padding(
+                        padding: EdgeInsets.only(left: 10.0),
+                      ),
+                      Text(d.data["Season"]),
+                    ],
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class Loc extends StatelessWidget {
+  final d;
+  const Loc({Key key, this.d}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    List<String> li = <String>[];
-    List<String> ci = <String>[];
-    List<String> ce = <String>[];
-    List<String> bc = <String>[];
-    List<String> bo = <String>[];
-    ci = data.data["Includes"].split("\\n");
-    ce = data.data["Excludes"].split("\\n");
-    li = data.data["Itinerary"].split("\\n");
-    bc = data.data["Belongings"]["Compulsory"].split("\\n");
-    bo = data.data["Belongings"]["Optional"].split("\\n");
-    // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          data.data["Name"],
-        ),
+        title: Text(d.data["Name"]),
       ),
       body: ListView(
         children: <Widget>[
@@ -67,7 +141,7 @@ class InfoScreen extends StatelessWidget {
                 fit: StackFit.expand,
                 children: <Widget>[
                   Image.network(
-                    data.data["Image"],
+                    d.data["Image"],
                     fit: BoxFit.cover,
                   )
                 ],
@@ -81,7 +155,7 @@ class InfoScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   Text(
-                    data.data["Name"],
+                    d.data["Name"],
                     style: TextStyle(
                       fontSize: 20.0,
                       fontWeight: FontWeight.bold,
@@ -96,7 +170,7 @@ class InfoScreen extends StatelessWidget {
             padding:
                 const EdgeInsets.symmetric(horizontal: 14.0, vertical: 8.0),
             child: Text(
-              "About the trip",
+              "About Location",
               style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
             ),
           ),
@@ -104,7 +178,7 @@ class InfoScreen extends StatelessWidget {
             padding:
                 const EdgeInsets.symmetric(horizontal: 14.0, vertical: 8.0),
             child: Text(
-              data.data["About"],
+              d.data["About"],
               style: TextStyle(fontSize: 16.0),
               textAlign: TextAlign.justify,
             ),
@@ -113,29 +187,7 @@ class InfoScreen extends StatelessWidget {
             padding:
                 const EdgeInsets.symmetric(horizontal: 14.0, vertical: 8.0),
             child: Text(
-              "Batch Dates",
-              style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-            ),
-          ),
-          Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 14.0, vertical: 8.0),
-            child: Text(
-              "Outing Date : " +
-                  data.data["EDate"].day.toString() +
-                  " " +
-                  findMonth(data.data["EDate"]) +
-                  " " +
-                  data.data["EDate"].year.toString(),
-              style: TextStyle(fontSize: 16.0),
-              textAlign: TextAlign.justify,
-            ),
-          ),
-          Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 14.0, vertical: 8.0),
-            child: Text(
-              "Short Information",
+              "Information",
               style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
             ),
           ),
@@ -158,7 +210,7 @@ class InfoScreen extends StatelessWidget {
                       child: Column(
                         children: <Widget>[
                           Text(
-                            "Category",
+                            "Base Village",
                             style: TextStyle(fontSize: 16.0),
                           )
                         ],
@@ -175,7 +227,7 @@ class InfoScreen extends StatelessWidget {
                       child: Column(
                         children: <Widget>[
                           Text(
-                            data.data["Information"]["Category"],
+                            d.data["Base"],
                             style: TextStyle(fontSize: 16.0),
                           )
                         ],
@@ -199,7 +251,7 @@ class InfoScreen extends StatelessWidget {
                       child: Column(
                         children: <Widget>[
                           Text(
-                            "Level",
+                            "Level(0-5)",
                             style: TextStyle(fontSize: 16.0),
                           )
                         ],
@@ -216,7 +268,7 @@ class InfoScreen extends StatelessWidget {
                       child: Column(
                         children: <Widget>[
                           Text(
-                            data.data["Information"]["Level"],
+                            d.data["Level"].toString(),
                             style: TextStyle(fontSize: 16.0),
                           )
                         ],
@@ -257,7 +309,7 @@ class InfoScreen extends StatelessWidget {
                       child: Column(
                         children: <Widget>[
                           Text(
-                            data.data["Information"]["Duration"],
+                            d.data["Time"].toString(),
                             style: TextStyle(fontSize: 16.0),
                           )
                         ],
@@ -281,7 +333,7 @@ class InfoScreen extends StatelessWidget {
                       child: Column(
                         children: <Widget>[
                           Text(
-                            "Transport",
+                            "Best Season",
                             style: TextStyle(fontSize: 16.0),
                           )
                         ],
@@ -298,7 +350,7 @@ class InfoScreen extends StatelessWidget {
                       child: Column(
                         children: <Widget>[
                           Text(
-                            data.data["Information"]["ModeOfTrans"],
+                            d.data["Season"],
                             style: TextStyle(fontSize: 16.0),
                           )
                         ],
@@ -339,7 +391,48 @@ class InfoScreen extends StatelessWidget {
                       child: Column(
                         children: <Widget>[
                           Text(
-                            data.data["Information"]["Distance"],
+                            d.data["Distance"].toString() + ' KM',
+                            style: TextStyle(fontSize: 16.0),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 3.0),
+                ),
+                Row(
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Column(
+                        children: <Widget>[Icon(Icons.check)],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Column(
+                        children: <Widget>[
+                          Text(
+                            "Height",
+                            style: TextStyle(fontSize: 16.0),
+                          )
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Column(
+                        children: <Widget>[Icon(Icons.arrow_forward)],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Column(
+                        children: <Widget>[
+                          Text(
+                            d.data["Height"].toString() + 'Meter',
                             style: TextStyle(fontSize: 16.0),
                           )
                         ],
@@ -357,31 +450,7 @@ class InfoScreen extends StatelessWidget {
             padding:
                 const EdgeInsets.symmetric(horizontal: 14.0, vertical: 8.0),
             child: Text(
-              "Itinerary",
-              style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-            ),
-          ),
-          ListView.builder(
-              physics: ClampingScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: li.length,
-              itemBuilder: (_, index) => Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: ListTile(
-                      contentPadding: EdgeInsets.all(0.0),
-                      leading: Icon(Icons.arrow_downward),
-                      title: Text(
-                        li[index].trim(),
-                        style: TextStyle(fontSize: 16.0),
-                        textAlign: TextAlign.justify,
-                      ),
-                    ),
-                  )),
-          Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 14.0, vertical: 8.0),
-            child: Text(
-              "Cost",
+              "Nearby places",
               style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
             ),
           ),
@@ -389,7 +458,7 @@ class InfoScreen extends StatelessWidget {
             padding:
                 const EdgeInsets.symmetric(horizontal: 14.0, vertical: 8.0),
             child: Text(
-              "₹" + data.data["Cost"].toString() + " /-",
+              d.data["Places"],
               style: TextStyle(fontSize: 16.0),
               textAlign: TextAlign.justify,
             ),
@@ -398,152 +467,19 @@ class InfoScreen extends StatelessWidget {
             padding:
                 const EdgeInsets.symmetric(horizontal: 14.0, vertical: 8.0),
             child: Text(
-              "Cost Includes",
+              "History",
               style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
             ),
           ),
-          ListView.builder(
-              physics: ClampingScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: ci.length,
-              itemBuilder: (_, index) => Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: ListTile(
-                      contentPadding: EdgeInsets.all(0.0),
-                      leading: Icon(
-                        Icons.check,
-                        color: Colors.green,
-                      ),
-                      title: Text(
-                        ci[index].trim(),
-                        style: TextStyle(fontSize: 16.0),
-                        textAlign: TextAlign.justify,
-                      ),
-                    ),
-                  )),
           Padding(
             padding:
                 const EdgeInsets.symmetric(horizontal: 14.0, vertical: 8.0),
             child: Text(
-              "Cost Excludes",
-              style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+              d.data["History"],
+              style: TextStyle(fontSize: 16.0),
+              textAlign: TextAlign.justify,
             ),
           ),
-          ListView.builder(
-              physics: ClampingScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: ce.length,
-              padding: EdgeInsets.zero,
-              itemBuilder: (_, index) => Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 8.0, vertical: 0.0),
-                    child: ListTile(
-                      contentPadding: EdgeInsets.zero,
-                      leading: Icon(
-                        Icons.clear,
-                        color: Colors.red,
-                      ),
-                      title: Text(
-                        ce[index].trim(),
-                        style: TextStyle(fontSize: 16.0),
-                        textAlign: TextAlign.justify,
-                      ),
-                    ),
-                  )),
-          Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 14.0, vertical: 8.0),
-            child: Text(
-              "Compulsory Belongings",
-              style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-            ),
-          ),
-          ListView.builder(
-              physics: ClampingScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: bc.length,
-              itemBuilder: (_, index) => Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 8.0, vertical: 0.0),
-                    child: ListTile(
-                      contentPadding: EdgeInsets.zero,
-                      leading: Icon(Icons.work),
-                      title: Text(
-                        bc[index].trim(),
-                        style: TextStyle(fontSize: 16.0),
-                        textAlign: TextAlign.justify,
-                      ),
-                    ),
-                  )),
-          Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 14.0, vertical: 8.0),
-            child: Text(
-              "Optional Belongings",
-              style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-            ),
-          ),
-          ListView.builder(
-              physics: ClampingScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: bo.length,
-              itemBuilder: (_, index) => Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 8.0, vertical: 0.0),
-                    child: ListTile(
-                      contentPadding: EdgeInsets.zero,
-                      leading: Icon(Icons.spa),
-                      title: Text(
-                        bo[index].trim(),
-                        style: TextStyle(fontSize: 16.0),
-                        textAlign: TextAlign.justify,
-                      ),
-                    ),
-                  )),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: <Widget>[
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
-                child: FlatButton(
-                  child: const Text(
-                    'Contact Us',
-                    style: TextStyle(
-                      color: Colors.grey,
-                    ),
-                  ),
-                  onPressed: () {MyNavigator.goToContact(context);},
-                ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
-                child: MaterialButton(
-                  color: Colors.blue,
-                  elevation: 3.0,
-                  child: const Text(
-                    'Register',
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                  onPressed: () {
-                    if(DateTime.now().compareTo(data.data['SDate'])>0){
-                      return null;
-                    }
-                    else{
-                      U.data = data;
-                      MyNavigator.goToReg(context, data);
-                    }
-                  },
-                ),
-              ),
-            ],
-          )
-          /*
-          static,
-          */
         ],
       ),
     );

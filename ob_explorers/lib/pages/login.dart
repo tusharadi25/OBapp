@@ -53,7 +53,7 @@ class _LoginPageState extends State<LoginScreen> {
       tag: ob.name,
       child: CircleAvatar(
         backgroundColor: Colors.transparent,
-        radius: 70.0,
+        radius: 60.0,
         child: Image.asset('assets/logo.png'),
       ),
     );
@@ -65,7 +65,7 @@ class _LoginPageState extends State<LoginScreen> {
       validator: (value) => value.isEmpty ? 'Email can\'t be empty' : null,
       decoration: InputDecoration(
         labelText: 'Email',
-        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+        contentPadding: EdgeInsets.fromLTRB(00.0, 00.0, 0.0, 0.0),
       ),
     );
 
@@ -76,12 +76,12 @@ class _LoginPageState extends State<LoginScreen> {
       validator: (value) => value.isEmpty ? 'Password can\'t be empty' : null,
       decoration: InputDecoration(
         labelText: 'Password',
-        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+        contentPadding: EdgeInsets.fromLTRB(00.0, 00.0, 00.0, 00.0),
       ),
     );
 
     final loginButton = Padding(
-      padding: EdgeInsets.symmetric(vertical: 16.0),
+      padding: EdgeInsets.symmetric(vertical: 6.0),
       child: Material(
         borderRadius: BorderRadius.circular(30.0),
         shadowColor: Colors.lightBlueAccent.shade100,
@@ -102,7 +102,11 @@ class _LoginPageState extends State<LoginScreen> {
         'Forgot password?',
         style: TextStyle(color: Colors.black54),
       ),
-      onPressed: () {},
+      onPressed: () {
+        final form = fkey.currentState;
+        form.save();
+        FirebaseAuth.instance.sendPasswordResetEmail(email: _email);
+      },
     );
 
     void discri(FirebaseUser user) {
@@ -164,6 +168,31 @@ class _LoginPageState extends State<LoginScreen> {
               splashColor: Colors.greenAccent,
               child: Text('Sign In with Google',
                   style: TextStyle(color: Colors.white)),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 10.0),
+              child: Material(
+                  elevation: 5.0,
+                  child: MaterialButton(
+                    elevation: 5.0,
+                    padding: EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Icon(
+                          Icons.person_add,
+                          size: 25.0,
+                        ),
+                        Text('  SIGNUP',
+                            style: TextStyle(
+                                color: Colors.black, fontSize: 15.0)),
+                      ],
+                    ),
+                    minWidth: 110.0,
+                    color: Colors.green,
+                    splashColor: Colors.greenAccent,
+                    onPressed: () => MyNavigator.goToSignUp(context),
+                  )),
             ),
           ],
         ),

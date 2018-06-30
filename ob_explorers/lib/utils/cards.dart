@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ob_explorers/utils/nav.dart';
 import 'package:ob_explorers/utils/ob.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:android_intent/android_intent.dart';
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -57,6 +58,9 @@ class MyHomePage extends StatelessWidget {
       appBar: new AppBar(
         title: new Text(title),
         elevation: 5.0,
+        actions: <Widget>[
+          IconButton(icon: Icon(Icons.notifications), onPressed:()=> MyNavigator.showNotification(context) )
+        ],
       ),
       drawer: Drawer(
         child: ListView(
@@ -65,23 +69,46 @@ class MyHomePage extends StatelessWidget {
             UserAccountsDrawerHeader(
               decoration: BoxDecoration(
                   image: DecorationImage(
-                      image: NetworkImage(
-                          "https://firebasestorage.googleapis.com/v0/b/offbeat-explorers-adi25.appspot.com/o/bg.jpg?alt=media&token=1a103ab2-66af-41cf-86e9-379f09e9d15c"))),
+                image: AssetImage('assets/bg.jpg'),
+              )),
               accountName: Text(displayName()),
               accountEmail: Text(tempU.email),
               currentAccountPicture: photoUrl(),
             ),
             ListTile(
               title: Text('Home'),
-              trailing: Icon(Icons.home),
+              trailing: Icon(Icons.home,
+              color: Colors.green,),
               onTap: () {
                 Navigator.pop(context);
                 MyNavigator.goToHome(context);
               },
             ),
             ListTile(
+              title: Text('Places To Visit'),
+              trailing: Icon(Icons.location_on,
+              color: Colors.teal),
+              onTap: (){
+                Navigator.pop(context);
+                MyNavigator.goToLocation(context);
+              },
+            ),
+            ListTile(
+              title: Text('Vlogs'),
+              trailing: Icon(Icons.video_library,
+              color: Colors.red,),
+              onTap: (){
+                Navigator.pop(context);
+                final AndroidIntent intent = new AndroidIntent(
+                    action: 'action_view',
+                    data: Uri.encodeFull('https://www.youtube.com/channel/UC4tanoeIV9GFp1B2ro3TYZg',),
+                    package: 'com.google.android.youtube');
+                intent.launch();
+              },
+            ),
+            ListTile(
               title: Text('About'),
-              trailing: Icon(Icons.info),
+              trailing: Icon(Icons.info,color: Colors.grey,),
               onTap: () {
                 Navigator.pop(context);
                 MyNavigator.goToAbout(context);
@@ -89,7 +116,7 @@ class MyHomePage extends StatelessWidget {
             ),
             ListTile(
               title: Text('Contact Us'),
-              trailing: Icon(Icons.phone),
+              trailing: Icon(Icons.phone,color: Colors.blue,),
               onTap: () {
                 Navigator.pop(context);
                 MyNavigator.goToContact(context);
@@ -97,7 +124,7 @@ class MyHomePage extends StatelessWidget {
             ),
             ListTile(
               title: Text('Creaters'),
-              trailing: Icon(Icons.create),
+              trailing: Icon(Icons.create,color: Colors.orange,),
               onTap: () {
                 Navigator.pop(context);
                 MyNavigator.goToDev(context);
@@ -108,7 +135,7 @@ class MyHomePage extends StatelessWidget {
                 Divider(),
                 ListTile(
                   title: Text('SignOut'),
-                  trailing: Icon(Icons.exit_to_app),
+                  trailing: Icon(Icons.exit_to_app,color: Colors.black,),
                   onTap: () {
                     FirebaseAuth.instance.signOut();
                     Navigator.of(context).pushNamedAndRemoveUntil(
@@ -211,8 +238,7 @@ class MyCard extends StatelessWidget {
                 child: Stack(
                   fit: StackFit.expand,
                   children: <Widget>[
-                    Image.network(
-                      data.data["Image"],
+                    Image.network(data.data["Image"],
                       fit: BoxFit.cover,
                     )
                   ],
@@ -229,6 +255,7 @@ class MyCard extends StatelessWidget {
                 onTap: () => MyNavigator.showInfo(context, data)),
             Divider(),
             Container(
+              padding: EdgeInsets.symmetric(vertical: 10.0),
               child: Column(
                 children: <Widget>[
                   Row(
@@ -323,8 +350,13 @@ class MyCard extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      U.data = data;
-                      MyNavigator.goToReg(context, data);
+                      if(DateTime.now().compareTo(data.data['SDate'])>0){
+                       return null;
+                      }
+                      else{
+                        U.data = data;
+                        MyNavigator.goToReg(context, data);
+                      }
                     },
                   ),
                 ],

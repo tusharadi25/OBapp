@@ -30,6 +30,9 @@ flutter:
   assets:
     - assets/logo.png
     - assets/mc.png
+    - assets/bg.jpg
+    - assets/Fort.png
+
   fonts:
     - family: RobotoMono
       fonts:

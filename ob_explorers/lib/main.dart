@@ -12,6 +12,8 @@ import 'package:ob_explorers/pages/contact.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:ob_explorers/pages/error.dart';
 import 'package:ob_explorers/pages/success.dart';
+import 'package:ob_explorers/pages/notification.dart';
+import 'package:ob_explorers/pages/locations.dart';
 
 var routes = <String, WidgetBuilder>{
   "/home": (BuildContext context) => HomeScreen(),
@@ -24,6 +26,8 @@ var routes = <String, WidgetBuilder>{
   "/error": (BuildContext context) => error(),
   "/contact": (BuildContext context) => ContactScreen(),
   "/success": (BuildContext context)=> SuccessScreen(),
+  "/notify":(BuildContext context)=> NotificationScreen(),
+  "/loc": (BuildContext context)=> LocationScreen(),
 };
 
 void main() => runApp(new MyApp());
