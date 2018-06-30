@@ -39,10 +39,15 @@ class InfoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<String> li = <String>[];
-    int n = '\\n'.allMatches(data.data["Itinerary"]).length;
+    List<String> ci = <String>[];
+    List<String> ce = <String>[];
+    List<String> bc = <String>[];
+    List<String> bo = <String>[];
+    ci = data.data["Includes"].split("\\n");
+    ce = data.data["Excludes"].split("\\n");
     li = data.data["Itinerary"].split("\\n");
-    String start = li[0];
-    li.removeAt(0);
+    bc = data.data["Belongings"]["Compulsory"].split("\\n");
+    bo = data.data["Belongings"]["Optional"].split("\\n");
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
@@ -343,44 +348,6 @@ class InfoScreen extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 3.0),
                 ),
-                Row(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Column(
-                        children: <Widget>[Icon(Icons.check)],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Column(
-                        children: <Widget>[
-                          Text(
-                            "Cost",
-                            style: TextStyle(fontSize: 16.0),
-                          )
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                        child: Column(
-                        children: <Widget>[Icon(Icons.arrow_forward)],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Column(
-                        children: <Widget>[
-                          Text("₹ "+
-                            data.data["Cost"].toString(),
-                            style: TextStyle(fontSize: 16.0),
-                          )
-                        ],
-                      ),
-                    )
-                  ],
-                )
               ],
             ),
           ),
@@ -392,23 +359,15 @@ class InfoScreen extends StatelessWidget {
               style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
             ),
           ),
-          Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 14.0, vertical: 8.0),
-            child: Text(
-              start,
-              style: TextStyle(fontSize: 18.0),
-              textAlign: TextAlign.justify,
-            ),
-          ),
           ListView.builder(
+              physics: ClampingScrollPhysics(),
               shrinkWrap: true,
               itemCount: li.length,
               itemBuilder: (_, index) => Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: ListTile(
                       contentPadding: EdgeInsets.all(0.0),
-                      leading: Icon(Icons.add),
+                      leading: Icon(Icons.arrow_downward),
                       title: Text(
                         li[index].trim(),
                         style: TextStyle(fontSize: 16.0),
@@ -416,11 +375,164 @@ class InfoScreen extends StatelessWidget {
                       ),
                     ),
                   )),
+          Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 14.0, vertical: 8.0),
+            child: Text(
+              "Cost",
+              style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+            ),
+          ),
+          Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 14.0, vertical: 8.0),
+            child: Text(
+              "₹" + data.data["Cost"].toString() + " /-",
+              style: TextStyle(fontSize: 16.0),
+              textAlign: TextAlign.justify,
+            ),
+          ),
+          Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 14.0, vertical: 8.0),
+            child: Text(
+              "Cost Includes",
+              style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+            ),
+          ),
+          ListView.builder(
+              physics: ClampingScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: ci.length,
+              itemBuilder: (_, index) => Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: ListTile(
+                      contentPadding: EdgeInsets.all(0.0),
+                      leading: Icon(
+                        Icons.check,
+                        color: Colors.green,
+                      ),
+                      title: Text(
+                        ci[index].trim(),
+                        style: TextStyle(fontSize: 16.0),
+                        textAlign: TextAlign.justify,
+                      ),
+                    ),
+                  )),
+          Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 14.0, vertical: 8.0),
+            child: Text(
+              "Cost Excludes",
+              style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+            ),
+          ),
+          ListView.builder(
+              physics: ClampingScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: ce.length,
+              padding: EdgeInsets.zero,
+              itemBuilder: (_, index) => Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 8.0, vertical: 0.0),
+                    child: ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      leading: Icon(
+                        Icons.clear,
+                        color: Colors.red,
+                      ),
+                      title: Text(
+                        ce[index].trim(),
+                        style: TextStyle(fontSize: 16.0),
+                        textAlign: TextAlign.justify,
+                      ),
+                    ),
+                  )),
+          Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 14.0, vertical: 8.0),
+            child: Text(
+              "Compulsory Belongings",
+              style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+            ),
+          ),
+          ListView.builder(
+              physics: ClampingScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: bc.length,
+              itemBuilder: (_, index) => Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 8.0, vertical: 0.0),
+                    child: ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      leading: Icon(Icons.work),
+                      title: Text(
+                        bc[index].trim(),
+                        style: TextStyle(fontSize: 16.0),
+                        textAlign: TextAlign.justify,
+                      ),
+                    ),
+                  )),
+          Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 14.0, vertical: 8.0),
+            child: Text(
+              "Optional Belongings",
+              style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+            ),
+          ),
+          ListView.builder(
+              physics: ClampingScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: bo.length,
+              itemBuilder: (_, index) => Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 8.0, vertical: 0.0),
+                    child: ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      leading: Icon(Icons.spa),
+                      title: Text(
+                        bo[index].trim(),
+                        style: TextStyle(fontSize: 16.0),
+                        textAlign: TextAlign.justify,
+                      ),
+                    ),
+                  )),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: <Widget>[
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
+                child: FlatButton(
+                  child: const Text(
+                    'Contact Us',
+                    style: TextStyle(
+                      color: Colors.grey,
+                    ),
+                  ),
+                  onPressed: () {/* ... */},
+                ),
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
+                child: MaterialButton(
+                  color: Colors.blue,
+                  elevation: 3.0,
+                  child: const Text(
+                    'Register',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  onPressed: () {/* ... */},
+                ),
+              ),
+            ],
+          )
           /*
-          iternary,
-          trekcost,
           static,
-          '''
           */
         ],
       ),
