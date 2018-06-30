@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ob_explorers/pages/Info.dart';
+import 'package:ob_explorers/pages/register.dart';
 
 class MyNavigator {
   static void goToHome(BuildContext context) {
@@ -18,12 +19,15 @@ class MyNavigator {
     Navigator.pushNamed(context, "/signup");
   }
 
-  static void showInfo(BuildContext context, var data){
-    Navigator.of(context).push(new PageRouteBuilder(pageBuilder:
-    (context, animation, secondaryAnimation){
-      return InfoScreen(data: data,);
+  static void showInfo(BuildContext context, var data) {
+    Navigator.of(context).push(new PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) {
+      return InfoScreen(
+        data: data,
+      );
     }));
   }
+
   static void goToAbout(BuildContext context) {
     Navigator.pushNamed(context, "/about");
   }
@@ -40,6 +44,12 @@ class MyNavigator {
     Navigator.pushNamed(context, "/error");
   }
 
-
+  static void goToReg(BuildContext context, var data) {
+    Navigator.of(context).push(new PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) {
+      return RegisterScreen(
+        data: data,
+      );
+    }));
+  }
 }
-

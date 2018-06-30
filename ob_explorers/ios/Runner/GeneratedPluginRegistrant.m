@@ -13,6 +13,7 @@
 #import <firebase_messaging/FirebaseMessagingPlugin.h>
 #import <google_sign_in/GoogleSignInPlugin.h>
 #import <shared_preferences/SharedPreferencesPlugin.h>
+#import <url_launcher/UrlLauncherPlugin.h>
 
 @implementation GeneratedPluginRegistrant
 
@@ -27,6 +28,7 @@
   [FLTFirebaseMessagingPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTFirebaseMessagingPlugin"]];
   [FLTGoogleSignInPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTGoogleSignInPlugin"]];
   [FLTSharedPreferencesPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTSharedPreferencesPlugin"]];
+  [FLTUrlLauncherPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTUrlLauncherPlugin"]];
 }
 
 @end

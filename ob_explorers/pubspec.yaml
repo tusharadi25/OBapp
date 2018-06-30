@@ -14,6 +14,8 @@ dependencies:
   firebase_messaging: ^1.0.3
   connectivity: any
   android_intent: any
+  url_launcher: ^3.0.2
+
 
 dev_dependencies:
   flutter_test:

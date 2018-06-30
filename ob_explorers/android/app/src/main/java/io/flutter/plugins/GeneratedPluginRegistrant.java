@@ -11,6 +11,7 @@ import io.flutter.plugins.firebase.database.FirebaseDatabasePlugin;
 import io.flutter.plugins.firebasemessaging.FirebaseMessagingPlugin;
 import io.flutter.plugins.googlesignin.GoogleSignInPlugin;
 import io.flutter.plugins.sharedpreferences.SharedPreferencesPlugin;
+import io.flutter.plugins.urllauncher.UrlLauncherPlugin;
 
 /**
  * Generated file. Do not edit.
@@ -30,6 +31,7 @@ public final class GeneratedPluginRegistrant {
     FirebaseMessagingPlugin.registerWith(registry.registrarFor("io.flutter.plugins.firebasemessaging.FirebaseMessagingPlugin"));
     GoogleSignInPlugin.registerWith(registry.registrarFor("io.flutter.plugins.googlesignin.GoogleSignInPlugin"));
     SharedPreferencesPlugin.registerWith(registry.registrarFor("io.flutter.plugins.sharedpreferences.SharedPreferencesPlugin"));
+    UrlLauncherPlugin.registerWith(registry.registrarFor("io.flutter.plugins.urllauncher.UrlLauncherPlugin"));
   }
 
   private static boolean alreadyRegisteredWith(PluginRegistry registry) {

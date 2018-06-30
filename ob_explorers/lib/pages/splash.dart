@@ -34,15 +34,12 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    List<Color> lis = <Color>[Colors.red,Colors.deepOrange, Colors.deepOrangeAccent];
     return Scaffold(
       body: Stack(
         fit: StackFit.expand,
         children: <Widget>[
           Container(
-            decoration: BoxDecoration(
-                gradient: RadialGradient(
-                    colors: lis, radius: 1.0, center: Alignment(0.0, 0.3))),
+            color: Colors.deepOrangeAccent,
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
