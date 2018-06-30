@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ob_explorers/utils/nav.dart';
 import 'package:ob_explorers/utils/ob.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -99,9 +100,9 @@ class MyHomePage extends StatelessWidget {
                   title: Text('SignOut'),
                   trailing: Icon(Icons.exit_to_app),
                   onTap: () {
-                    Navigator.pop(context);
-                    Navigator.pop(context);
-                    Navigator.pop(context);
+                    FirebaseAuth.instance.signOut();
+                    Navigator.of(context)
+                        .pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false);
                   },
                 ),
               ],
@@ -110,7 +111,7 @@ class MyHomePage extends StatelessWidget {
         ),
       ),
       body: new StreamBuilder(
-          stream: Firestore.instance.collection('Trips').snapshots(),
+          stream: Firestore.instance.collection('Trips').orderBy("SDate",descending: true).snapshots(),
           builder: (context, snapshot) {
             if (!snapshot.hasData)
               return new Container(

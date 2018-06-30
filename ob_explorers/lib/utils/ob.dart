@@ -14,4 +14,6 @@ class ob {
 class U {
   static var user;
   static var data;
+
+  static var token;
 }

@@ -11,7 +11,7 @@ dependencies:
   firebase_auth: ^0.5.11
   firebase_database: ^1.0.1
   shared_preferences: ^0.4.2
-  firebase_messaging: ^1.0.3
+  firebase_messaging:
   connectivity: any
   android_intent: any
   url_launcher: ^3.0.2

@@ -3,6 +3,7 @@ import 'package:ob_explorers/pages/home.dart';
 import 'package:ob_explorers/pages/login.dart';
 import 'package:ob_explorers/pages/splash.dart';
 import 'package:ob_explorers/pages/start.dart';
+import 'package:ob_explorers/utils/ob.dart';
 import 'package:ob_explorers/pages/signup.dart';
 import 'package:ob_explorers/pages/about.dart';
 import 'package:ob_explorers/pages/Gcreate.dart';
@@ -35,15 +36,33 @@ class AppState extends State<MyApp> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _firebaseMessaging.requestNotificationPermissions();
+    _firebaseMessaging
+        .requestNotificationPermissions(const IosNotificationSettings(
+      sound: true,
+      alert: true,
+      badge: true,
+    )
+    );
+
+    _firebaseMessaging.onIosSettingsRegistered
+        .listen((IosNotificationSettings setting) {
+          print("Ios");
+    });
 
     _firebaseMessaging.configure(
-      onMessage: (Map<String, dynamic> message) {},
-      onResume: (Map<String, dynamic> message) {},
-      onLaunch: (Map<String, dynamic> message) {},
+      onLaunch: (Map<String, dynamic> message) {
+        print('onLaunch');
+      },
+      onResume: (Map<String, dynamic> message) {
+        print('onResume');
+      },
+      onMessage: (Map<String, dynamic> message) {
+        print('onMessage');
+      },
     );
     _firebaseMessaging.getToken().then((token) {
       print(token);
+      U.token = token;
     });
   }
 
