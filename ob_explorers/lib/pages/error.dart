@@ -18,7 +18,6 @@ class Error extends StatelessWidget {
             Padding( padding: EdgeInsets.all(10.0),
               child: Text('Connect to Internet'),
             ),
-
           ],
         ),
       ),
