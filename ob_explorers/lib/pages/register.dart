@@ -13,15 +13,19 @@ class RegisterScreen extends StatelessWidget {
         title: Text('Register'),
       ),
       body: Container(
-        child: RaisedButton(
-          child: Text(data.data["Name"]),
-          onPressed: () {
-            final AndroidIntent intent = new AndroidIntent(
-                action: 'action_view',
-                data: Uri.encodeFull('https://www.google.com'),
-                package: 'com.android.chrome');
-            intent.launch();
-          },
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: RaisedButton(
+            color: Colors.blue,
+            child: Text(data.data["Name"]),
+            onPressed: () {
+              final AndroidIntent intent = new AndroidIntent(
+                  action: 'action_view',
+                  data: Uri.encodeFull('https://www.google.com'),
+                  package: 'com.android.chrome');
+              intent.launch();
+            },
+          ),
         ),
       ),
     );
