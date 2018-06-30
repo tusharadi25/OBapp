@@ -4,7 +4,8 @@ import 'package:ob_explorers/pages/register.dart';
 
 class MyNavigator {
   static void goToHome(BuildContext context) {
-    Navigator.of(context)
+    Navigator
+        .of(context)
         .pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
   }
 
@@ -13,7 +14,8 @@ class MyNavigator {
   }
 
   static void goToStart(BuildContext context) {
-    Navigator.of(context)
+    Navigator
+        .of(context)
         .pushNamedAndRemoveUntil('/start', (Route<dynamic> route) => false);
   }
 
@@ -44,6 +46,10 @@ class MyNavigator {
 
   static void error(BuildContext context) {
     Navigator.pushNamed(context, "/error");
+  }
+
+  static void goToContact(BuildContext context) {
+    Navigator.pushNamed(context, "/contact");
   }
 
   static void goToReg(BuildContext context, var data) {

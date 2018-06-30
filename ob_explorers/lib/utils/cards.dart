@@ -72,9 +72,11 @@ class MyHomePage extends StatelessWidget {
               currentAccountPicture: photoUrl(),
             ),
             ListTile(
-              title: Text('Item 1'),
+              title: Text('Home'),
+              trailing: Icon(Icons.home),
               onTap: () {
                 Navigator.pop(context);
+                MyNavigator.goToHome(context);
               },
             ),
             ListTile(
@@ -83,6 +85,14 @@ class MyHomePage extends StatelessWidget {
               onTap: () {
                 Navigator.pop(context);
                 MyNavigator.goToAbout(context);
+              },
+            ),
+            ListTile(
+              title: Text('Contact Us'),
+              trailing: Icon(Icons.phone),
+              onTap: () {
+                Navigator.pop(context);
+                MyNavigator.goToContact(context);
               },
             ),
             ListTile(
@@ -101,8 +111,8 @@ class MyHomePage extends StatelessWidget {
                   trailing: Icon(Icons.exit_to_app),
                   onTap: () {
                     FirebaseAuth.instance.signOut();
-                    Navigator.of(context)
-                        .pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false);
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                        '/login', (Route<dynamic> route) => false);
                   },
                 ),
               ],
@@ -111,7 +121,10 @@ class MyHomePage extends StatelessWidget {
         ),
       ),
       body: new StreamBuilder(
-          stream: Firestore.instance.collection('Trips').orderBy("SDate",descending: true).snapshots(),
+          stream: Firestore.instance
+              .collection('Trips')
+              .orderBy("SDate", descending: true)
+              .snapshots(),
           builder: (context, snapshot) {
             if (!snapshot.hasData)
               return new Container(

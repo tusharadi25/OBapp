@@ -8,6 +8,7 @@ import 'package:ob_explorers/pages/signup.dart';
 import 'package:ob_explorers/pages/about.dart';
 import 'package:ob_explorers/pages/Gcreate.dart';
 import 'package:ob_explorers/pages/developers.dart';
+import 'package:ob_explorers/pages/contact.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:ob_explorers/pages/error.dart';
 
@@ -20,6 +21,7 @@ var routes = <String, WidgetBuilder>{
   "/dev": (BuildContext context) => DevScreen(),
   "/gc": (BuildContext context) => SignUp(),
   "/error": (BuildContext context) => error(),
+  "/contact": (BuildContext context) => ContactScreen(),
 };
 
 void main() => runApp(new MyApp());
@@ -41,12 +43,11 @@ class AppState extends State<MyApp> {
       sound: true,
       alert: true,
       badge: true,
-    )
-    );
+    ));
 
     _firebaseMessaging.onIosSettingsRegistered
         .listen((IosNotificationSettings setting) {
-          print("Ios");
+      print("Ios");
     });
 
     _firebaseMessaging.configure(
