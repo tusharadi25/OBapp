@@ -310,6 +310,7 @@ class MyCard extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
+                      U.data = data;
                       MyNavigator.goToReg(context, data);
                     },
                   ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ob_explorers/utils/nav.dart';
+import 'package:ob_explorers/utils/ob.dart';
 
 class InfoScreen extends StatelessWidget {
   final data;
@@ -528,6 +529,7 @@ class InfoScreen extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
+                    U.data = data;
                     MyNavigator.goToReg(context, data);
                   },
                 ),

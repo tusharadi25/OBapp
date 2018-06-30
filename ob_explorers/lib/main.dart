@@ -47,18 +47,17 @@ class AppState extends State<MyApp> {
       print(token);
       U.token=token;
     });
-
   }
 
   @override
   Widget build(BuildContext context) {
-      return MaterialApp(
-          theme: ThemeData(
-              primaryColor: Colors.deepOrangeAccent,
-              accentColor: Colors.white,
-              fontFamily: 'Roboto-Regular'),
-          debugShowCheckedModeBanner: false,
-          home: SplashScreen(),
-          routes: routes);
+    return MaterialApp(
+        theme: ThemeData(
+            primaryColor: Colors.deepOrangeAccent,
+            accentColor: Colors.white,
+            fontFamily: 'Roboto-Regular'),
+        debugShowCheckedModeBanner: false,
+        home: SplashScreen(),
+        routes: routes);
   }
 }
