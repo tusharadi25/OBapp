@@ -105,7 +105,7 @@ class _LoginPageState extends State<LoginScreen> {
     );
 
     void discri() {
-      var newU = true;
+      var newU = false;
       //TODO: check
       if (newU)
         MyNavigator.goToGcreate(context);

@@ -36,6 +36,10 @@ class MyNavigator {
     Navigator.pushNamed(context, "/gc");
   }
 
+  static void error(BuildContext context) {
+    Navigator.pushNamed(context, "/error");
+  }
+
 
 }
 

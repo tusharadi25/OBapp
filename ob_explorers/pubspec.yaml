@@ -12,7 +12,8 @@ dependencies:
   firebase_database: ^1.0.1
   shared_preferences: ^0.4.2
   firebase_messaging: ^1.0.3
-
+  connectivity: any
+  android_intent: any
 
 dev_dependencies:
   flutter_test:

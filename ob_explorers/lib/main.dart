@@ -8,6 +8,7 @@ import 'package:ob_explorers/pages/about.dart';
 import 'package:ob_explorers/pages/Gcreate.dart';
 import 'package:ob_explorers/pages/developers.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:ob_explorers/pages/error.dart';
 
 var routes = <String, WidgetBuilder>{
   "/home": (BuildContext context) => HomeScreen(),
@@ -17,6 +18,7 @@ var routes = <String, WidgetBuilder>{
   "/about": (BuildContext context) => AboutScreen(),
   "/dev": (BuildContext context) => DevScreen(),
   "/gc": (BuildContext context) => SignUp(),
+  "/error": (BuildContext context) => Error(),
 };
 
 void main() => runApp(new MyApp());
@@ -47,17 +49,18 @@ class AppState extends State<MyApp>{
     _firebaseMessaging.getToken().then((token){
       print(token);
     });
+
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        theme: ThemeData(
-            primaryColor: Colors.deepOrangeAccent,
-            accentColor: Colors.white,
-            fontFamily: 'Roboto-Regular'),
-        debugShowCheckedModeBanner: false,
-        home: SplashScreen(),
-        routes: routes);
+      return MaterialApp(
+          theme: ThemeData(
+              primaryColor: Colors.deepOrangeAccent,
+              accentColor: Colors.white,
+              fontFamily: 'Roboto-Regular'),
+          debugShowCheckedModeBanner: false,
+          home: SplashScreen(),
+          routes: routes);
   }
 }
