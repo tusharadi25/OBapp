@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:async';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:ob_explorers/pages/Gcreate.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class LoginScreen extends StatefulWidget {
   static String tag = 'login-page';
@@ -104,13 +105,18 @@ class _LoginPageState extends State<LoginScreen> {
       onPressed: () {},
     );
 
-    void discri() {
-      var newU = false;
-      //TODO: check
-      if (newU)
-        MyNavigator.goToGcreate(context);
-      else
-        MyNavigator.goToHome(context);
+    void discri(FirebaseUser user) {
+      var newU = true;
+      Firestore.instance.collection('Udb').document('${user.uid}').get().then((DocumentSnapshot d){
+        if(d.exists) {
+          newU = false;
+        }      //TODO: check
+        if(newU) {
+          MyNavigator.goToGcreate(context);
+        }else {
+          MyNavigator.goToHome(context);
+        }
+      });
     }
 
     Future<FirebaseUser> _handleSignIn() async {
@@ -152,7 +158,7 @@ class _LoginPageState extends State<LoginScreen> {
               minWidth: 200.0,
               height: 45.0,
               onPressed: () => _handleSignIn()
-                  .then((FirebaseUser user) => discri())
+                  .then((FirebaseUser user) => discri(user))
                   .catchError((e) => print(e)),
               color: Colors.lightBlueAccent,
               splashColor: Colors.greenAccent,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Error extends StatelessWidget {
+class error extends StatelessWidget {
 
 
   @override
