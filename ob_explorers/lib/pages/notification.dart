@@ -57,6 +57,13 @@ class MyNotification extends StatelessWidget{
     child: Padding(padding: EdgeInsets.all(10.0),
     child: ListTile(
       title: Text(d.data["Text"]),
+      trailing: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: <Widget>[Text(d.data["Time"].toString().substring(0,10),
+        style: TextStyle(fontSize: 10.0),),
+        Text(d.data["Time"].toString().substring(11,16),
+          style: TextStyle(fontSize: 10.0),)],
+      ),
       subtitle: Text(d.data["Lable"]),
     ),),);
   }

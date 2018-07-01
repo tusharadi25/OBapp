@@ -12,6 +12,51 @@ class ContactScreen extends StatelessWidget {
     }
   }
 
+  _sachinCall() async {
+    const url = 'tel:+919022708087';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  _vipulCall() async {
+    const url = 'tel:+919821123491';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  _email() async {
+    const url = 'mailto:obexplorers@gmail.com';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  _fb() async {
+    const url = 'https://www.facebook.com/Offbeat-Explorers-487757901377939/';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  _insta() async {
+    const url = 'https://instagram.com/offbeat_explorers';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +82,10 @@ class ContactScreen extends StatelessWidget {
                   children: <Widget>[
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Row(
+                      child: FlatButton(onPressed: _sachinCall, 
+                       padding: EdgeInsets.all(0.0),
+                        child:
+                        Row(
                         children: <Widget>[
                           Icon(
                             Icons.phone,
@@ -47,15 +95,20 @@ class ContactScreen extends StatelessWidget {
                             padding: EdgeInsets.symmetric(horizontal: 10.0),
                           ),
                           Text(
-                            "90227 08087 ( SACHIN DESHMUKH )",
+                            "90227 08087\n ( SACHIN DESHMUKH )",
                             style: TextStyle(fontSize: 16.0),
                           )
                         ],
                       ),
                     ),
+                    ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Row(
+                      child: FlatButton(onPressed: _vipulCall,
+                        padding: EdgeInsets.zero,
+
+                        child:
+                        Row(
                         children: <Widget>[
                           Icon(
                             Icons.phone,
@@ -65,15 +118,19 @@ class ContactScreen extends StatelessWidget {
                             padding: EdgeInsets.symmetric(horizontal: 10.0),
                           ),
                           Text(
-                            "98211 23491 ( VIPUL SAWANT )",
+                            "98211 23491\n ( VIPUL SAWANT )",
                             style: TextStyle(fontSize: 16.0),
                           )
                         ],
                       ),
                     ),
+                    ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Row(
+                      child:
+                      FlatButton(onPressed: _email,
+                        padding: EdgeInsets.zero,
+                        child:Row(
                         children: <Widget>[
                           Icon(
                             Icons.email,
@@ -89,9 +146,13 @@ class ContactScreen extends StatelessWidget {
                         ],
                       ),
                     ),
+                    ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Row(
+                      child:
+                      FlatButton(onPressed: _fb,
+                        padding: EdgeInsets.zero,
+                        child:Row(
                         children: <Widget>[
                           Text(
                             "f",
@@ -110,9 +171,13 @@ class ContactScreen extends StatelessWidget {
                         ],
                       ),
                     ),
+                    ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Row(
+                      child: FlatButton(onPressed: _insta,
+                        padding: EdgeInsets.zero,
+                        child:
+                      Row(
                         children: <Widget>[
                           Icon(
                             Icons.camera_alt,
@@ -122,27 +187,23 @@ class ContactScreen extends StatelessWidget {
                             padding: EdgeInsets.symmetric(horizontal: 10.0),
                           ),
                           Text(
-                            "https://instagram.com/offbeat_explorers",
+                            "https://instagram.com/\noffbeat_explorers",
                             style: TextStyle(fontSize: 16.0),
                           )
                         ],
                       ),
                     ),
+                    ),
                   ],
                 ),
               ),
+
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: FlatButton(
                   child: Text("Locate Us"),
                   onPressed: () {
                     _openMap();
-                    /*
-                      final AndroidIntent intent = new AndroidIntent(
-                        action: 'action_view',
-                        data: Uri.encodeFull('https://www.google.com'),
-                        package: 'com.android.chrome');
-                    intent.launch();*/
                   },
                 ),
               )

@@ -14,6 +14,7 @@ import 'package:ob_explorers/pages/error.dart';
 import 'package:ob_explorers/pages/success.dart';
 import 'package:ob_explorers/pages/notification.dart';
 import 'package:ob_explorers/pages/locations.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 var routes = <String, WidgetBuilder>{
   "/home": (BuildContext context) => HomeScreen(),
@@ -44,6 +45,7 @@ class AppState extends State<MyApp> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    var x;
     _firebaseMessaging
         .requestNotificationPermissions(const IosNotificationSettings(
       sound: true,
@@ -58,13 +60,13 @@ class AppState extends State<MyApp> {
 
     _firebaseMessaging.configure(
       onLaunch: (Map<String, dynamic> message) {
-        print('onLaunch');
+        Firestore.instance.collection('Test').document('a').setData({'testing':'fgc'},);
       },
       onResume: (Map<String, dynamic> message) {
-        print('onResume');
+        Firestore.instance.collection('Test').document('a').setData({'testing':'hj'},);
       },
       onMessage: (Map<String, dynamic> message) {
-        print('onMessage');
+        Firestore.instance.collection('Test').document('a').setData({'testing':'hjv'},);
       },
     );
     _firebaseMessaging.getToken().then((token) {
