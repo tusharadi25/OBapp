@@ -73,7 +73,7 @@ class ContactScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
                     "Feel Free To Contact Us",
-                    style: TextStyle(fontSize: 24.0),
+                    style: TextStyle(fontSize: 20.0),
                   ),
                 ),
               ),

@@ -8,18 +8,9 @@ import 'package:ob_explorers/utils/nav.dart';
 import 'dart:async';
 
 class load extends StatelessWidget {
-  final String name = ob.name;
 
   @override
   Widget build(BuildContext context) {
-    Future<bool> savePref(String email, String pswd) async {
-      SharedPreferences pref = await SharedPreferences.getInstance();
-      pref.setString('email', email);
-      pref.commit();
-      pref.setString('pswd', pswd);
-      print('' + email + pswd);
-      return pref.commit();
-    }
 
     Future<String> loadPref(String name) async {
       SharedPreferences pref = await SharedPreferences.getInstance();
@@ -30,8 +21,6 @@ class load extends StatelessWidget {
       try {
         FirebaseUser user = await FirebaseAuth.instance
             .signInWithEmailAndPassword(email: _email, password: _pswd);
-        print('Signed in');
-        savePref(_email, _pswd);
         if (user.email == _email) {
           U.user = user;
           MyNavigator.goToHome(context);
@@ -42,40 +31,30 @@ class load extends StatelessWidget {
     }
 
 
-    Future<void> log() async {
-      var _email, _pswd;
-      try {
-        SharedPreferences pref = await SharedPreferences.getInstance();
-        loadPref('email').then((String e) {
-          loadPref('pswd').then((String p) {
-              login(e,p);
-          });
-        }
-        );
-      }
-      catch(e){
-
-      }
-    }
-
-
-    log();
-
-    return Scaffold(body:  Container(
-          color: Colors.greenAccent,
-        child:
-        Center(
+    Widget ab = Scaffold(
+      body: Container(
+        color: Colors.greenAccent,
+        child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               CircularProgressIndicator(),
-              Padding(padding: EdgeInsets.all(5.0),),
+              Padding(
+                padding: EdgeInsets.all(5.0),
+              ),
               Text("Signing In....")
             ],
           ),
         ),
-    ),
+      ),
     );
+
+    loadPref('email').then((String e) {
+      loadPref('pswd').then((String p) {
+        login(e, p);
+      });
+    });
+    return ab;
   }
 }
