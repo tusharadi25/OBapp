@@ -88,6 +88,32 @@ class StartScreen extends StatelessWidget {
                                   splashColor: Colors.blueAccent,
                                   onPressed: () =>
                                       MyNavigator.goToLogin(context)))),
+                      Padding(
+                        padding: EdgeInsets.only(top: 10.0),
+                        child: Material(
+                            elevation: 5.0,
+                            borderRadius: BorderRadius.circular(30.0),
+                            child: MaterialButton(
+                              elevation: 5.0,
+                              padding: EdgeInsets.all(8.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Icon(
+                                    Icons.person_add,
+                                    size: 40.0,
+                                  ),
+                                  Text('  SIGNUP',
+                                      style: TextStyle(
+                                          color: Colors.black, fontSize: 20.0)),
+                                ],
+                              ),
+                              minWidth: 300.0,
+                              color: Colors.green,
+                              splashColor: Colors.greenAccent,
+                              onPressed: () => MyNavigator.goToSignUp(context),
+                            )),
+                      ),
 
                     ],
                   ),

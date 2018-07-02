@@ -3,7 +3,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ob_explorers/utils/nav.dart';
 import 'package:ob_explorers/utils/ob.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:async';
 import 'package:android_intent/android_intent.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -52,8 +54,14 @@ class MyHomePage extends StatelessWidget {
     }
   }
 
+
   @override
   Widget build(BuildContext context) {
+
+    Future<void> cleanpref() async{
+      SharedPreferences pref = await SharedPreferences.getInstance();
+      pref.setBool('login', false);
+    }
     return new Scaffold(
       appBar: new AppBar(
         title: new Text(title),
@@ -137,6 +145,7 @@ class MyHomePage extends StatelessWidget {
                   title: Text('SignOut'),
                   trailing: Icon(Icons.exit_to_app,color: Colors.black,),
                   onTap: () {
+                    cleanpref();
                     FirebaseAuth.instance.signOut();
                     Navigator.of(context).pushNamedAndRemoveUntil(
                         '/login', (Route<dynamic> route) => false);

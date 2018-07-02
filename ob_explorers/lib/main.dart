@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
 import 'package:ob_explorers/pages/home.dart';
 import 'package:ob_explorers/pages/login.dart';
 import 'package:ob_explorers/pages/splash.dart';
@@ -15,6 +16,8 @@ import 'package:ob_explorers/pages/success.dart';
 import 'package:ob_explorers/pages/notification.dart';
 import 'package:ob_explorers/pages/locations.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:ob_explorers/pages/Loading.dart';
 
 var routes = <String, WidgetBuilder>{
   "/home": (BuildContext context) => HomeScreen(),
@@ -29,6 +32,7 @@ var routes = <String, WidgetBuilder>{
   "/success": (BuildContext context)=> SuccessScreen(),
   "/notify":(BuildContext context)=> NotificationScreen(),
   "/loc": (BuildContext context)=> LocationScreen(),
+  "/load" : (BuildContext context)=> load(),
 };
 
 void main() => runApp(new MyApp());
@@ -41,11 +45,13 @@ class MyApp extends StatefulWidget {
 class AppState extends State<MyApp> {
   final FirebaseMessaging _firebaseMessaging = new FirebaseMessaging();
 
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    var x;
+
+
     _firebaseMessaging
         .requestNotificationPermissions(const IosNotificationSettings(
       sound: true,

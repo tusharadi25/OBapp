@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:ob_explorers/utils/ob.dart';
 import 'package:ob_explorers/utils/nav.dart';
 import 'package:connectivity/connectivity.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -18,17 +19,43 @@ class _SplashScreenState extends State<SplashScreen> {
     else return false;
   }
 
+  Future<bool> checkLogin() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    var b;
+    try {
+      b=pref.getBool('login');
+      if(b==null) {
+        pref.setBool('login', false);
+        return false;
+      }
+      if(b==true)
+        return true;
+      return false;
+    } catch (e){
+      return false;
+    }
+  }
+
+  void path(bool b){
+      if(b==true)
+        MyNavigator.goToLogin(context);
+      else
+        MyNavigator.goToStart(context);
+  }
+
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    Timer(Duration(seconds: 4), (){
-      netcheck().then((bool a ){
-        if(a)
-          MyNavigator.goToStart(context);
-        else
+    Timer(Duration(seconds: 3), () {
+      netcheck().then((bool a) {
+        if (a) {
+          checkLogin().then((bool b) => path(b));
+        } else {
           MyNavigator.error(context);
-      } ).catchError((e)=>{} );
+        }
+      });
     });
   }
 

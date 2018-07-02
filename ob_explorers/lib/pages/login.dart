@@ -4,8 +4,8 @@ import 'package:ob_explorers/utils/nav.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:async';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:ob_explorers/pages/Gcreate.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
   static String tag = 'login-page';
@@ -29,13 +29,31 @@ class _LoginPageState extends State<LoginScreen> {
     }
   }
 
+  Future<bool> savePref(String email, String pswd) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    pref.setString('email',email);
+    pref.commit();
+    pref.setString('pswd',pswd);
+    print(''+email+pswd);
+    return pref.commit();
+  }
+
+  Future<String> loadPref(String name) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    return pref.getString(name);
+  }
+
   void validateAndSubmit() async {
     if (validateAndSave()) {
       try {
+        SharedPreferences pref = await SharedPreferences.getInstance();
         FirebaseUser user = await FirebaseAuth.instance
             .signInWithEmailAndPassword(email: _email, password: _pswd);
         print('Signed in');
+        savePref(_email,_pswd);
         if (user.email == _email) {
+          pref.setBool('login', true);
+          print('nice');
           U.user = user;
           MyNavigator.goToHome(context);
         }
@@ -44,6 +62,25 @@ class _LoginPageState extends State<LoginScreen> {
       }
     }
   }
+
+  Future<bool> checkLogin() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    var b;
+    try {
+      b=pref.getBool('login');
+      return b;
+    } catch (e){
+      pref.setBool('login', false);
+      return false;
+    }
+  }
+
+  void s(bool b) async{
+    if(b==true){
+      MyNavigator.goLoad(context);
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -57,6 +94,8 @@ class _LoginPageState extends State<LoginScreen> {
         child: Image.asset('assets/logo.png'),
       ),
     );
+
+    checkLogin().then((bool a)=>s(a));
 
     final email = TextFormField(
       keyboardType: TextInputType.emailAddress,
@@ -123,17 +162,7 @@ class _LoginPageState extends State<LoginScreen> {
       });
     }
 
-    Future<FirebaseUser> _handleSignIn() async {
-      GoogleSignInAccount googleUser = await _googleSignIn.signIn();
-      GoogleSignInAuthentication googleAuth = await googleUser.authentication;
-      FirebaseUser user = await _auth.signInWithGoogle(
-        accessToken: googleAuth.accessToken,
-        idToken: googleAuth.idToken,
-      );
-      U.user = user;
-      print("signed in " + user.displayName);
-      return user;
-    }
+
 
     return Scaffold(
       backgroundColor: Colors.limeAccent[50],
@@ -157,43 +186,19 @@ class _LoginPageState extends State<LoginScreen> {
                 ],
               ),
             ),
-            Divider(),
-            MaterialButton(
-              minWidth: 200.0,
-              height: 45.0,
-              onPressed: () => _handleSignIn()
-                  .then((FirebaseUser user) => discri(user))
-                  .catchError((e) => print(e)),
-              color: Colors.lightBlueAccent,
-              splashColor: Colors.greenAccent,
-              child: Text('Sign In with Google',
-                  style: TextStyle(color: Colors.white)),
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 10.0),
-              child: Material(
-                  elevation: 5.0,
-                  child: MaterialButton(
-                    elevation: 5.0,
-                    padding: EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Icon(
-                          Icons.person_add,
-                          size: 25.0,
-                        ),
-                        Text('  SIGNUP',
-                            style: TextStyle(
-                                color: Colors.black, fontSize: 15.0)),
-                      ],
-                    ),
-                    minWidth: 110.0,
-                    color: Colors.green,
-                    splashColor: Colors.greenAccent,
-                    onPressed: () => MyNavigator.goToSignUp(context),
-                  )),
-            ),
+           // Divider(),
+           // MaterialButton(
+           //   minWidth: 200.0,
+            //  height: 45.0,
+           //   onPressed: () => _handleSignIn()
+            //      .then((FirebaseUser user) => discri(user))
+             //     .catchError((e) => print(e)),
+             // color: Colors.lightBlueAccent,
+             // splashColor: Colors.greenAccent,
+             // child: Text('Sign In with Google',
+              //    style: TextStyle(color: Colors.white)),
+           // ),
+
           ],
         ),
       )),

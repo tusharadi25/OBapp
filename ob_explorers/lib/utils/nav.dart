@@ -57,6 +57,10 @@ class MyNavigator {
   static void goToAbout(BuildContext context) {
     Navigator.pushNamed(context, "/about");
   }
+  static void goLoad(BuildContext context) {
+    Navigator.pushNamed(context, "/load");
+  }
+
 
   static void goToDev(BuildContext context) {
     Navigator.pushNamed(context, "/dev");
