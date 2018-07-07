@@ -530,7 +530,7 @@ class InfoScreen extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
-                    if(DateTime.now().compareTo(data.data['SDate'])>0){
+                    if(DateTime.now().compareTo(data.data['SDate'])>0 || U.data.data["Reg"]==false ){
                       return null;
                     }
                     else{

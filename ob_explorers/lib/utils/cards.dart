@@ -359,7 +359,7 @@ class MyCard extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      if(DateTime.now().compareTo(data.data['SDate'])>0){
+                      if(DateTime.now().compareTo(data.data['SDate'])>0 || data.data["Reg"]==false ){
                        return null;
                       }
                       else{

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ob_explorers/utils/ob.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ob_explorers/utils/nav.dart';
+import 'package:android_intent/android_intent.dart';
 
 class RegisterScreen extends StatefulWidget {
   var data;
@@ -33,7 +34,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
           'Other': '$_od'
         },
       }, merge: true);
-      MyNavigator.success(context);
+      final AndroidIntent intent = new AndroidIntent(
+          action: 'action_view',
+          data: Uri.encodeFull('${U.data.data["PayUrl"]}',),
+          package: 'com.android.chrome');
+      intent.launch();
+      MyNavigator.goToHome(context);
     } else
       print("Invalid");
   }
@@ -162,7 +168,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           Icons.person_add,
                         ),
                         Padding(padding: EdgeInsets.symmetric(horizontal:5.0),),
-                        Text('Accept And Continue',
+                        Text('Register and Pay',
                             style:
                                 TextStyle(color: Colors.black, fontSize: 20.0)),
                       ],
